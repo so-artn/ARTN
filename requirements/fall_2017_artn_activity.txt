@@ -1,0 +1,85 @@
+
+ARTN activities and goals for fall 2017
+
+----- 
+Consecutive engineering time in fall 2017, not counting TBS -
+see detailed list at end.
+6  nights in early Oct 
+10 nights in early Nov
+6  nights in early Dec
+4  nights in end Dec/early Jan
+4  nights at end Jan
+-----
+
+* Activities:
+
+- Petr Kubanek visit.
+- Queue scheduling an entire night with RTS2.
+- Using RTS2 to carry out astronomical observations.
+- Further commissioning of Chimera high speed camera.
+- Development of guider interface.
+- Work on telescope/facility hardware interface, eg dome.
+- Define science and technical requirements for ARTN:
+  - for individual facilities
+  - for network manager / Big Brother
+- Define technical / safety requirements for remote / autonomous 
+  operation of ARTN telescopes and Kuiper in particular.
+
+* Needs / resources:
+
+[to be filled out]
+Include time estimates for specific tasks.
+
+* Goals / milestones for this semester:
+
+- Demonstrate utility of queue obs by doing regular astronomical
+  observations under RTS2 control.
+- Have some kind of interface (GUI or text) that allows an observer / 
+  scheduler who is not a black belt to set up and control a night's 
+  worth of RTS2 queue.
+- Flesh out specification/requirements for ARTN and network manager 
+  so that development of queue operations on 61" can continue without 
+  introducing future incompatibilities / limitations.
+
+[more to be added]
+
+* Future milestones:
+
+[to be filled in]
+
+-----
+
+* Sources of targets / observations for this semester
+
+Peter Milne
+Max Moe
+Nathan Smith
+Ian McGreer?
+others?
+
+Detailed list of nights:
+
+Time available on Kuiper 61" this fall in consecutive runs, as of Sept 15.
+Note that all time awarded to PI Weiner is available for 
+engineering / ARTN development / commissioning
+
+ Oct 2            TBS
+*Oct 3  - Oct 6   Engineering
+*Oct 7  - Oct 8   Weiner
+ Oct 9            TBS
+
+ Oct 28 - Oct 30  TBS
+*Oct 31 - Nov 3   Engineering
+*Nov 4  - Nov 9   Weiner
+
+ Nov 28 - Nov 30  TBS
+*Dec 1  - Dec 4   Engineering
+*Dec 5  - Dec 6   Weiner
+
+ Dec 26 - Dec 29  TBS
+*Dec 30 - Jan 2   Engineering
+ Jan 3  - Jan 7   TBS
+
+ Jan 23 - Jan 27  TBS
+*Jan 28 - Jan 31  Engineering  
+
