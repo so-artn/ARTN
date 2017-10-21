@@ -12,6 +12,18 @@
 
 # Benjamin Weiner, bjw@as.arizona.edu
 
+# To run this, to process all the files in the current directory, try:
+# python
+# import sys 
+# sys.path.append('/Users/bjw/stellarview/python')
+# import kuiper_reduce as kp
+# fstruct = kp.getheaders('')
+# imagelist = []
+# for image in fstruct:
+#    imagelist.append(image['filename'])
+# kp.process_and_merge_list(imagelist)
+
+
 # Requires astropy, ccdproc, maybe msumastro
 # maybe bottleneck
 
@@ -76,6 +88,7 @@ def plot_image(image, scale):
     plotmin = mean - scale*stddev
     plt.imshow(image, vmax=plotmax, vmin=plotmin)
     # need to write the plot out somehow
+    return
     
 # image statistics
 imstats = lambda dat: (dat.min(), dat.max(), dat.mean(), dat.std())
@@ -84,6 +97,7 @@ imstats = lambda dat: (dat.min(), dat.max(), dat.mean(), dat.std())
 def read_data(direc):
     data_dir = direc
     images = ImageFileCollection(data_dir, keywords='*')
+    return images
 
 # write an image or a list of images. prefix can be eg 'r_' or 'reduced_' or nothing
 # Argument is a list of image objects not filenames?
@@ -92,11 +106,17 @@ def save_images(images,prefix):
         im_hdu_list = im.to_hdu()
         fname_base = os.path.basename(im.header('filename'))
         newname = prefix + fname_base
-        im_hdu_list.writeto(newname)
+        try:
+            im_hdu_list.writeto(newname)
+        except: 
+            mylog('Failed write, trying to overwrite: ',newname)
+            im_hdu_list.writeto(newname,overwrite=True)
+    return
 
 # Convenience function for logging.  Could be print or output to file
 def mylog(mystring):
     print mystring
+    return
 
 #####
 # Get image lists / info
@@ -298,7 +318,11 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median')
     	fname = line.strip()
 	hdulist = fits.open(fname)
 	if ifirst == True:
-            hdulist.writeto(outname)
+            try:
+                hdulist.writeto(outname)
+            except:
+                mylog('Failed write, trying to overwrite: ',outname)
+                hdulist.writeto(outname,overwrite=True)
             ifirst = False
         nhdus = len(hdulist)
         # Data of this image will be listed in a single entry in combine_list
@@ -527,7 +551,7 @@ def proc_objects_all(imagelist, master_bias, flatlist):
 def process_list(imagelist):
 
     imstruct = getheaders(imagelist)
-    zerolist,domelist,skylist,objectlist,stdlist,badlist = make_lists(imstruct)
+    zerolist,domelist,skylist,objectlist,stdlist,badlist = makelists(imstruct)
 
     masterbiasname = 'Bias_master.fits'
     oscan_trim_list(zerolist)
@@ -535,14 +559,16 @@ def process_list(imagelist):
 
     oscan_trim_list(domelist)
     bias_list_by_file(domelist,masterbiasname)
-    flatnames = make_master_flats(listname,flat_prefix='Flat_',filter_key='FILTER')
+    flatnames = make_master_flats(domelist,flat_prefix='Flat_',filter_key='FILTER')
     # Are we going to use domeflats or skyflats?
     bias_list_by_file(skylist,masterbiasname)
     oscan_trim_list(skylist)
-    skyflatnames = make_master_flats(listname,flat_prefix='Skyflat_',filter_key='FILTER')
+    skyflatnames = make_master_flats(skylist,flat_prefix='Skyflat_',filter_key='FILTER')
 
     oscan_trim_list(objectlist)
+    # flatfield with domes
     proc_objects_all(objectlist, masterbiasname, flatnames )
+    # flatfield with skies only
     # proc_objects_all(objectlist, masterbiasname, skyflatnames )
     mylog("Processed images from list {0}".format(imagelist))
     return objectlist
@@ -571,7 +597,11 @@ def merge_m4k_list(imagelist,raw_dir="raw",merged_dir="merged"):
         fname_base = os.path.basename(fname)
         newname = merged_dir + "/" + fname_base
         # newname = "{0}/{1}".format(merged_dir, fname_base)
-        hdulist_new.writeto( newname )
+        try:
+            hdulist_new.writeto( newname )
+        except:
+            mylog('Failed write, trying to overwrite: ',newname)
+            hdulist_new.writeto( newname, overwrite=True )
         hdulist_new.close()
         mylog("merge_m4k_list: wrote merged image {0}".format(newname))
     #
