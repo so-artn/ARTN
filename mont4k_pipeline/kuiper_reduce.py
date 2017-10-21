@@ -109,7 +109,7 @@ def save_images(images,prefix):
         try:
             im_hdu_list.writeto(newname)
         except: 
-            mylog('Failed write, trying to overwrite: ',newname)
+            mylog('Failed write, trying to overwrite: '+newname)
             im_hdu_list.writeto(newname,overwrite=True)
     return
 
@@ -311,6 +311,9 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median')
         listfile.close()
     else:
         flist = listname
+    if len(flist) == 0:
+        mylog('combine_list got a list of zero files '+listname)
+        return
     # combine_list will be a list of lists of data objects
     combine_list = []
     ifirst = True
@@ -321,7 +324,7 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median')
             try:
                 hdulist.writeto(outname)
             except:
-                mylog('Failed write, trying to overwrite: ',outname)
+                mylog('Failed write, trying to overwrite: '+outname)
                 hdulist.writeto(outname,overwrite=True)
             ifirst = False
         nhdus = len(hdulist)
@@ -600,7 +603,7 @@ def merge_m4k_list(imagelist,raw_dir="raw",merged_dir="merged"):
         try:
             hdulist_new.writeto( newname )
         except:
-            mylog('Failed write, trying to overwrite: ',newname)
+            mylog('Failed write, trying to overwrite: '+newname)
             hdulist_new.writeto( newname, overwrite=True )
         hdulist_new.close()
         mylog("merge_m4k_list: wrote merged image {0}".format(newname))
