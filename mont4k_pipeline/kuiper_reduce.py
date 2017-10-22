@@ -161,14 +161,20 @@ def getheaders(filelist,dir='',allfitsfiles=False):
             hdus = fits.open(fullname)
             # get file header
             hdr = hdus[0].header
-            hdr1 = hdus[1].header
+            # if there is more than 1 hdu, use hdu=1 for the data
+            ndhus = len(hdus)
+            # ihdudata = 0
+            #if nhdus > 1 :
+            ihdudata = 1
+                 # hdr1 = hdus[ihdudata].header
             # do simple image statistics to get mean and rms of image
-            mean1 = np.mean(hdus[1].data)
+            # No data may yield a nan
+            mean1 = np.mean(hdus[ihdudata].data)
             # median1 = np.median(hdus[1].data)
-            rms1 = np.std(hdus[1].data)        
+            rms1 = np.std(hdus[ihdudata].data)        
             # get each keyword and put into structure
             struct1 = {'filename':file, 'title':hdr['object'], 'nextend':hdr['nextend'],
-                   'ut':hdr['ut'], 'ra':hdr['ra'], 'dec':hdr['dec'],
+                    'ut':hdr['ut'], 'ra':hdr['ra'], 'dec':hdr['dec'],
                    'equinox':hdr['equinox'], 'azimuth':hdr['azimuth'], 'elev':hdr['elevat'],
                    'airmass':hdr['airmass'], 'filter':hdr['filter'], 'exptime':hdr['exptime'],
                    'imtype':hdr['imagetyp'], 'mean':mean1, 'rms':rms1 }
@@ -265,6 +271,7 @@ def makelists(imstruct):
     
     return zerolist,domelist,skylist,objectlist,stdlist,badlist
 
+# This will create/overwrite files
 def write_list_to_file(filelist,fname):
     f = open(fname,'w')
     for name1 in filelist:
@@ -280,11 +287,16 @@ def write_list_to_file(filelist,fname):
 def oscan_trim_file(fname):
   hdulist = fits.open(fname)
   nhdus = len(hdulist)
-  # loop from 1 to last HDU.
-  for i in range(nhdus)[1:] :
+  if nhdus > 1:
+      istart = 1
+  else:
+      istart = 0
+  # loop from first-data to last HDU.
+  for i in range(nhdus)[istart:] :
      hdulist = fits.open(fname)
      data1 = ccdproc.CCDData(hdulist[i].data, unit="adu")
      data1.header = hdulist[i].header
+     # What happens if file is already overscan-subtracted?
      oscan1 = ccdproc.subtract_overscan(data1, fits_section=data1.header['BIASSEC'], add_keyword={'overscan': True, 'calstat': 'O'}, model=models.Polynomial1D(1))
      trim1 = ccdproc.trim_image(oscan1, fits_section=oscan1.header['TRIMSEC'], add_keyword={'trimmed': True, 'calstat': 'OT'})
      fits.update(fname, trim1.data, header=trim1.header, ext=i)
@@ -330,7 +342,11 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median')
         nhdus = len(hdulist)
         # Data of this image will be listed in a single entry in combine_list
 	tmplist = []
-	for i in range(nhdus)[1:] :
+        if nhdus > 1:
+            istart = 1
+        else:
+            istart = 0
+	for i in range(nhdus)[istart:] :
             data1 = ccdproc.CCDData(hdulist[i].data, unit="adu")
             head1 = hdulist[i].header
             head1['filename'] = fname
@@ -339,7 +355,7 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median')
             # combine_list.append(ccdproc.CCDData(data=data1, meta=head1, unit="adu"))
         hdulist.close()
       	combine_list.append(tmplist)
-    for	i in range(nhdus)[1:] :
+    for	i in range(nhdus)[istart:] :
         # Take the i-1'th data extension (0-based) from each image and
         # put these into a list to combine
         tmplist = [ elem[i-1] for elem in combine_list ]
@@ -362,7 +378,11 @@ def bias_file_by_file(fname,biasname):
     hdulist = fits.open(fname)
     hdubias = fits.open(biasname)
     nhdus = len(hdulist)
-    for i in range(nhdus)[1:] :
+    if nhdus > 1:
+        istart = 1
+    else:
+        istart = 0
+    for i in range(nhdus)[istart:] :
         data1 = ccdproc.CCDData(hdulist[i].data, unit="adu")
         data1.header = hdulist[i].header
         bias1 = ccdproc.CCDData(hdubias[i].data, unit="adu")
@@ -390,7 +410,11 @@ def flat_file_by_file(fname,flatname):
     hdulist = fits.open(fname)
     hduflat = fits.open(flatname)
     nhdus = len(hdulist)
-    for i in range(nhdus)[1:] :
+    if nhdus > 1:
+        istart = 1
+    else:
+        istart = 0
+    for i in range(nhdus)[istart:] :
         data1 = ccdproc.CCDData(hdulist[i].data, unit="adu")
         data1.header = hdulist[i].header
         flat1 = ccdproc.CCDData(hduflat[i].data, unit="adu")
@@ -415,8 +439,13 @@ def make_master_bias(imagelist,bias_name='Bias_master.fits'):
 
 # combine one list of flat names into a master flat
 # It would be useful to have an option to scale the flats during combine
-def make_master_oneflat(imagelist,flat_name='Flat_master.fits'):
-    combine_list_to_file(imagelist,flat_name,combine='average')
+# Combining flats with average lessens the need to scale, but
+# scaling and combining skyflats with median is desirable to reject stars.
+def make_master_oneflat(imagelist,flat_name='Flat_master.fits',combine='average'):
+    if combine == 'median':
+        combine_list_to_file(imagelist,flat_name,combine='median')
+    else:
+        combine_list_to_file(imagelist,flat_name,combine='average')
     return
 
 # take a list of flats, sort it by filter, and combine each set into
@@ -443,15 +472,15 @@ def make_master_flats(listname,flat_prefix='Flat_',filter_key='FILTER',read_from
         flatlist1 = [fname for fname, filt in filter_name_dict.items() if filt == name]
         # remove any spaces from filter name
         filtnamesquash = name.replace(" ","")
-        outname = flat_prefix + filtnamesquash
+        outname = flat_prefix + filtnamesquash + '.fits'
         make_master_oneflat(flatlist1, flat_name=outname)
         list_outnames.append(outname)
         mylog("Combined master flat {0}".format(outname))
     # all done
     return list_outnames
 
-# Find the filter names of each image and return a dictionary and a list
-# of unique filter names
+# Find the filter names of each image and return a dictionary
+# of image: filter_name, and a list of unique filter names
 def find_filters_list(flist,filter_key='FILTER'):
     filter_name_dict = {}
     filter_names = []
@@ -460,17 +489,21 @@ def find_filters_list(flist,filter_key='FILTER'):
     	fname = line.strip()
 	hdulist = fits.open(fname)
         filtname = hdulist[0].header[filter_key]
-        if filtname == '':
+        if filtname == '' and len(hdulist)>1 :
             filtname = hdulist[1].header[filter_key]
         filter_names.append(filtname)
         #struct1 = {'filename': fname, 'filter': filtname}
         # struct1 = {filtname: fname}
-        struct1 = {fname: filtname}
-        filter_name_dict.append(struct1)
+        # struct1 = {fname: filtname}
+        filter_name_dict[fname] = filtname
         hdulist.close()
     # uniq-ify the filter name list
     filters_uniq = list( set(filter_names) )
-    mylog("find_filters_list made a dictionary")
+    # this might also give a unique set 
+    filters_uniq = list( set( filter_name_dict.values() ) )
+    mylog("find_filters_list made a dictionary and found filters: ")
+    # print filter_name_dict
+    print filters_uniq
     return filter_name_dict, filters_uniq
 
 # ccdproc.flat_correct automatically normalizes by the mean of the flat,
@@ -487,6 +520,10 @@ def renormalize_by_flat(image,flat,read_from_file=False):
         hduimage = image
         hduflat = flat
     nhdus = len(hdulist)
+    # Do nothing if image only has 0-1 data extension
+    if nhdus <=1:
+        mylog("Don't need to renormalize a 1-extension flat, returning")
+        return
     secmeans = np.zeros(nhdus-1)
     for i in range(nhdus)[1:] :
         secmeans[i-1] = hduflat[i].data.mean()
@@ -521,9 +558,9 @@ def renormalize_by_flat(image,flat,read_from_file=False):
 # them from a different directory, etc
 # assumes your objects are all in same filter as the flat
 #
-def proc_objects_filter(imagelist, filtername, master_bias, master_flat):
+def proc_objects_filter(imagelist, master_bias, master_flat, filtername=''):
     # list of objects?
-    # pick only those matching filter?
+    # pick only those matching filtername?
     for fname in imagelist:
         bias_file_by_file(fname, master_bias)
         flat_file_by_file(fname, master_flat)
@@ -542,7 +579,7 @@ def proc_objects_all(imagelist, master_bias, flatlist):
             flats_match = [fname for fname, filt in flat_name_dict.items() if filt == filter1]
             # if more than one flat matches, which is unlikely, take the first
             flat_match = flats_match[0]
-            proc_objects_filter(objlist1, master_bias, flatmatch)
+            proc_objects_filter(objlist1, master_bias, flat_match)
             mylog("processed objects for {0}".format(filter1))
         else:
             mylog("proc_objects_all: couldnt find flat for {0}".format(filter1))
@@ -564,8 +601,8 @@ def process_list(imagelist):
     bias_list_by_file(domelist,masterbiasname)
     flatnames = make_master_flats(domelist,flat_prefix='Flat_',filter_key='FILTER')
     # Are we going to use domeflats or skyflats?
-    bias_list_by_file(skylist,masterbiasname)
     oscan_trim_list(skylist)
+    bias_list_by_file(skylist,masterbiasname)
     skyflatnames = make_master_flats(skylist,flat_prefix='Skyflat_',filter_key='FILTER')
 
     oscan_trim_list(objectlist)
