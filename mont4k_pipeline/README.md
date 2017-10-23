@@ -18,10 +18,12 @@ doesn't natively support multi-extension FITS files, so the convenience
 routines in this pipeline had to be written to run on MEFs.
 
 Possibly to be added:
-sky flat / illumination correction
-fringe correction
-superskies?
-astrometry
-photometry of standards?
+
+* sky flat / illumination correction
+* fringe correction
+* superskies?
+* cosmic ray removal / astroscrappy
+* astrometry
+* photometry of standards?
 
 
