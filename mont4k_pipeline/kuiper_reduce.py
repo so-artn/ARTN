@@ -2,20 +2,21 @@
 #
 # Test Kuiper 61" data reduction with python ccdproc
 #
-# Trying to follow along with the ccdproc example at
+# Originally trying to follow along with the ccdproc example at
 # http://nbviewer.jupyter.org/gist/mwcraig/06060d789cc298bbb08e
 # with modifications to handle multi-extension FITS files
 #
-# I wrote code to try to group images into bias, flat,
-# twiflat, object - it's in ~/python/ccdreduce/makelists.py
+# I wrote code to test the image values and automatically group images into 
+# bias, flat, skyflat, object - it's in ~/python/ccdreduce/makelists.py
 # and have inserted that into this file now.
 
 # Benjamin Weiner, bjw@as.arizona.edu
 
-# To run this, to process all the files in the current directory, try:
+# To run this, to process all the image files in your current directory, try:
+#
 # python
 # import sys 
-# sys.path.append('/Users/bjw/stellarview/python')
+# sys.path.append('/Users/bjw/stellarview/python') [use whatever directory you put the kuiper_reduce.py file in]
 # import kuiper_reduce as kp
 # fstruct = kp.getheaders('')
 # imagelist = []
@@ -24,8 +25,10 @@
 # kp.process_and_merge_list(imagelist)
 
 
-# Requires astropy, ccdproc, maybe msumastro
-# maybe bottleneck
+# Requires astropy, and ccdproc,
+# also requires msumastro and bottleneck, 
+# but the dependencies on the latter two could probably be removed
+# Try running pip install ccdproc, etc, at the command line to install.
 
 # needed for py notebook only?
 # %matplotlib inline
