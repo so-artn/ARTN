@@ -29,9 +29,10 @@ Possibly to be added:
 The pipeline requires astropy and ccdproc. If you don't have these
 try "pip install ccdproc" at the command line, etc.
 It also currently requires the packages msumastro and bottleneck, but these aren't
-really being used and could be commented out.
+really being used and could be commented out.  But for now you should try
+"pip install msumastro", "pip install bottleneck", "pip install ccdproc" before running.
 
-Look at the comments at the beginning for hwo to run it. You can try:
+Look at the comments at the beginning for how to run it. You can try:
 
 to process all the files in the current directory, try:
 
