@@ -24,7 +24,7 @@ log into rts2obs@bigpop (ssh from gerard, same pwd as bigobs)
 
 sudo service rts2 start
 rts2-queue  to check what's in each queue; "plan" is the default queue
-rts2-queue --queue plan clear   will clear it.
+rts2-queue --queue plan --clear   will clear it.
 rts2-targetinfo <id> and rst2-targetlist are also useful.
 
 to populate queue from the LOTIS list using Sam's script to parse LOTIS:
