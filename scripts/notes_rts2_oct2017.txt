@@ -157,6 +157,12 @@ rts2-target -c C0 -s "BIG61.OFFS=(1m,0) filter=2 E 20 filter=2 E 20 filter=3 E 1
 
    (this order was BVRIU, I think)
 
+Can also try adding moon distance and airmass constraints (this is untested):
+
+rts2-target -c C0 --lunarDistance 20: --airmass :2.2 -s "BIG61.OFFS=(1m,0) filter=2 E 20 filter=2 E 20 filter=3 E 10 filter=3 E 10 filter=1 E 5 filter=1 E 5 filter=4 E 10 filter=4 E 10 filter=0 E 60 filter=0 E 60" 1100
+
+Add target to queue:
+
 rts2-queue --queue plan 1100
 
 RTS2 will stick it into the queue according to the order option you have
