@@ -1,0 +1,44 @@
+
+-----
+
+Taking calibrations manually with Mont4K
+
+You shouldn't need to take any darks. I think the dark current of the M4K, as with most good CCDs that are LN2 cooled, is pretty small. And if you're going to take shortish exposures in bright time, the sky will swamp any dark current anyway.
+
+To take biases, and flats, I would do it manually rather than with RTS2. You will likely need to kill the RTS2 dataserver and start the regular dataserver with the icon on gerard's desktop. (To go back, kill that dataserver by closing the xterm it is running in, and start the RTS2 dataserver with the ipython command.) You will want to set the directory in the AZCam gui to some sensible directory on gerard (I think this is set under "Filename.") Make sure the directory exists before taking exposures.
+
+Biases: 
+just set the image type in the AZCam gui to "zero." It should take 0 second exposures, even if the exp time is not set to 0. Take a loop of 10 or 20 using sequence in the azcam gui.
+
+Dome flats:
+with the telescope at zenith, dome closed, open the mirror covers. Make sure the dome is stowed and lined up with the arrow on the wall over the catwalk door. If not lined up, use the control box on the wall - set to Local, line it up, set back to computer, and downstairs, click "Init Dome" in the INDI panel (after enabling communications to dome).
+
+Use the INDI panel to enable the telescope and dome, and click the buttons to send the tel and dome to the Dome Flat position. This will tip the telescope far over, so make sure there are no ladders or anything it can hit.
+
+Turn the flat lamps on with the box with a dial on it on the side of the pier - East side. Make sure the flat lamp illumination is close to centered on the flat screen (f you initialized the dome, this should be ok). I usually set it to 40 for R band and take about 5-7 sec exposures? Try to get about 10-20,000 counts per exposure. You'll likely need to turn the dial up to 60 for B band.  And U band with flat lamps is pretty hopeless, just try to get whatever you can. I take about 5 flats in each filter if I am getting 15-20,000 counts per image.
+
+Set the AZCam gui image type to "flat" and set the exposure time and sequence as needed.
+
+Finishing:
+When done, stow both the telescope and dome and close the mirror covers. Only move the mirror covers at zenith. It's easy to forget to close the mirror covers after taking flats; of course you need to have them closed before opening the dome.
+
+Sky flats are more involved and it really helps to watch someone take them. 
+
+Sky flats:
+Only bother if it's pretty clear at sunset. If it's cloudy, no guarantee the sky is uniform.
+
+In the dome:
+At/just before sunset, with tel at zenith, close the mirror covers, open the windscreens and dome as usual, open the mirror covers.
+
+Downstairs:
+Set the focus to something near nominal (like 2400 for Mont4K). Turn tracking on. Turn auto dome on. Start the paddle GUI. The idea is that stars will start to appear in your sky flats, so you want to track to keep them from streaking, and offset between exposures to move the stars onto different pixels, so they get taken out when you combine the images.
+
+Start taking exposures as soon after sunset as you are able, starting with the bluest filter and a 1 sec exposure. Look at the image values and aim for 10-20,000 counts per frame. Adjust the exposure time as necessary. Use the paddle to offset between exposures by ~30-60 arcsec. You will usually find that the sky fades about a factor ~ 1.2 to 2 in brightness between exposures, ie if you get a good flux level with a 4 second exposure, try 6 sec for the next one, and keep checking the counts.  Take at least 3 exposures per filter and it's nice to have 5. Don't forget to keep offsetting.  You'll find that when you switch to the next reddest filter, your exp time can go back down some (eg if you are taking a 10 sec exp in B, you might drop down to a 5 sec exp in V - I'm guessing at this).
+
+This is kind of hectic and it's often hard to do more than 3 filters. By the time you start taking 60-120 sec exposures to get enough counts, your images are full of stars and it's time to quit. At this point, the sky is usually still too bright to do anything useful, so turn off tracking and stow the telescope and dome.  Wait a little and it will get dark enough to point and focus.
+
+A subtle point is that if the Galactic plane is passing overhead at sunset, your flats will fill up with stars more quickly, and it may be better to slew away from the zenith before starting the procedure, but that's extra credit.
+
+If you don't get sky flats at sunset, it is possible to do them before sunrise, in the reverse order (wait N minutes after 12 degree twilight and start with the redder filters). But that's a pain because it means staying up longer.
+
+
