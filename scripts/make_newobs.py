@@ -8,16 +8,41 @@
 #  No sanity checking on values is performed, so if you enter an invalid
 #  RA, Dec, filter number, etc, it won't tell you.
 #
+#  The format of the text file is:
+#  name ra dec queue_id_num filtnum1 exptime1 n_exp1 filtnum2 exptime2 n_exp2 ...
+#  for example:
+#  sn2017glx 19:43:40.3 56:06:36.3 1101  1 180 3  3 120 3  2 240 3
+#
 #  BJW, Nov 29-30 2017
 #
 #  DONE: read input from file rather than interactive
 #  TODO: have it execute the script rather than asking the user to run w/sh
 #  TODO: have rts2-newtarget use command line args
+#  TODO: read the filter names from a file and translate name-> number
 #  TODO: dithering?
 
 import os
 import sys
 # from astropy.io import ascii
+
+# This sets a default filter order, but it may be different between runs,
+# so be careful.  Current default order is U,R,B,V,I,Schott.
+# It returns a dictionary with key=filter name string, value = filter number
+# In the future we should read the order from a file.
+def set_filter_dict():
+    filter_dict = {}
+    filter_dict['U'] = 0
+    filter_dict['B'] = 2
+    filter_dict['V'] = 3
+    filter_dict['R'] = 1
+    filter_dict['I'] = 4
+    filter_dict['Schott'] = 5
+    # Also put the numbers into the dictionary so specifying a filter by
+    # number-string is legal, ie you can use either 'R' or '1' to mean filter 1.
+    for i in range(6):
+        filter_str = '%1i' % (i)
+        filter_dict[filter_str] = i
+    return filter_dict
 
 # Write the rts2-newtarget script. This is run taking input rather than
 # command line arguments, so I use the shell "<< EOF" syntax.
@@ -68,6 +93,9 @@ def set_target_defaults():
 # lunardist, airmass limits are set by default
 # initial offset is always 1m and no dithering, which is not ideal
 def make_obs_script_prompt(queue_id_num):
+    # Don't use filter names yet, until order is verified.
+    # filter_names = set_filter_dict()
+    filter_names = None
     cmd = set_target_defaults()
     print 'Filter number is order in filter wheel GUI starting at 0; poss U,R,B,V,I,schott'
     exp_string = ''
@@ -76,7 +104,13 @@ def make_obs_script_prompt(queue_id_num):
         if obs_str.strip() == '':
             break
         fields = obs_str.split()
-        filtnum = int(fields[0])
+        if filter_names is not None:
+            try:
+                filtnum = filter_names[fields[0]]
+            except:
+                filtnum = int(fields[0])
+        else:
+            filtnum = int(fields[0])
         exptime = float(fields[1])
         nexp = int(fields[2])
         # Truncating exptime to an integer for now
@@ -93,14 +127,23 @@ def make_obs_script_prompt(queue_id_num):
 
 # Make the obs script given the queue id and a list of
 # [filtnum1, exptime1, n_exp1, ...]
-def make_obs_script(queue_id_num, explist):
+def make_obs_script(queue_id_num, explist, filter_names=None):
     cmd = set_target_defaults()
     exp_string = ''
     # Need 3 entries for each filter
     nfilts = int(len(explist) / 3)
     for i in range(nfilts):
         j = 0 + i*3
-        filtnum = int(explist[j])
+        if filter_names is not None:
+            # here explist[j] is a string with the filter name, eg 'R' or '1'
+            # use try/except to catch an undefined filter. The except will
+            # fall back to a filter number, so if not an integer, it will still fail.
+            try:
+                filtnum = filter_names[explist[j]]
+            except:
+                filtnum = int(explist[j])
+        else:
+            filtnum = int(explist[j])
         exptime = float(explist[j+1])
         nexp = int(explist[j+2])
         # Truncating exptime to an integer for now
@@ -137,7 +180,7 @@ def make_obs_interactive(fname):
 # Read a line of
 #   name ra dec queue-id filter_num1 exptime1 n_exp1 filter_num2 exptime2 n_exp2 ...
 # and write commands
-def make_commands_fromfile(cline):
+def make_commands_fromfile(cline,filter_names=None):
     fields = cline.split()
     if len(fields) < 7:
         print "Line for ",fields[0]," doesn't have enough data"
@@ -148,18 +191,21 @@ def make_commands_fromfile(cline):
     queue_id_num = int(fields[3])
     expstuff = fields[4:]
     cmd1 = make_newtarget_args(name,ra,dec,queue_id_num)
-    cmd2 = make_obs_script(queue_id_num,expstuff)
+    cmd2 = make_obs_script(queue_id_num,expstuff,filter_names=filter_names)
     queue_name = 'plan'
     cmd3 = add_object_queue(queue_name, queue_id_num)
     return queue_id_num, cmd1, cmd2, cmd3
 
 # Read the targets and info from a file
 def make_obs_fromfile(inputname,fname):
+    filters = set_filter_dict()
     infile = open(inputname,'r')
     f = open(fname,'a')
     for line in infile:
         # skip empty lines and comment lines
         if (line.strip() != '' and line[0] != '#'):
+            # Don't use the filter dict until we confirm filter order.
+            # queue_id_num, cmd1, cmd2, cmd3 = make_commands_fromfile(line,filter_names=filters)
             queue_id_num, cmd1, cmd2, cmd3 = make_commands_fromfile(line)
             f.write(cmd1+'\n')
             f.write(cmd2+'\n')
