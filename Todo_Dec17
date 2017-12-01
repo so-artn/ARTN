@@ -1,0 +1,10 @@
+To do list for the Dec 1-5 ARTN Engineering Run
+
+1. Establish easy setup procedure with minimum manual changing of parameters in artn-mon.  Document on the github page.
+2. Test out dithering for an image sequence.  Document.
+3.  Communicate target names from the RTS2 queue to image header so the images get that name in the header field rather than "RTS2."
+3a.  This can be expanded to a more general request:  We need to figure out all the header keywords we want populated as a medium-term task; I'd argue we won't totally know this until we know how we're going to archive, reduce and distribute the data.  In the meantime, it would be good to have a clear recipe for adding in header keywords via RTS2.
+4. Need to figure out why the AzCam and BIG61 drivers sometimes lose communication, and 1) have a way of detecting when this happens / issuing a warning; 2) friendly way of restarting driver ideally without stopping RTS2 and the queue; 3) fix it so it doesn't happen.
+5. Progress towards automatically taking: autofocus / flats / standards / etc.
+6.  Test Ben's script for adding a target to the rts queue.
+7. Work on making filter identification robust for ARTN use.
