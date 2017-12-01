@@ -1,6 +1,7 @@
 # Test input catalog for make_newobs.py
-# Fields are name ra dec queue_id filt1 exptime1 n_exp1 filt2 exptime2 n_exp2 ...
+# Fields are: name ra dec queue_id filtnum1 exptime1 n_exp1 filtnum2 exptime2 n_exp2 ...
+# Fields are white-space delimited and don't have to be column aligned
 #
-sn2017glx 19:43:40.3 56:06:36.3 1101 1 180 3 3 120 3 2 240 3
-sn2017eaw 20:34:44.2 60:11:36.0 1102 3 120 3 2 240 3
-sn2017grn 23:31:53.6 -05:00:43.4 1103 1 180 3 3 120 3 2 240 3
+sn2017glx 19:43:40.3 56:06:36.3 1101  1 180 3  3 120 3  2 240 3
+sn2017eaw 20:34:44.2 60:11:36.0 1102  3 120 3  2 240 3
+sn2017grn 23:31:53.6 -05:00:43.4 1103 1 180 3  3 120 3  2 240 3
