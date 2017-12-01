@@ -10,7 +10,7 @@
 #
 #  BJW, Nov 29 2017
 #
-#  TODO: read input from file rather than interactive
+#  DONE: read input from file rather than interactive
 #  TODO: have it execute the script rather than asking the user to run w/sh
 #  TODO: have rts2-newtarget use command line args
 #  TODO: dithering?
