@@ -8,7 +8,7 @@
 #  No sanity checking on values is performed, so if you enter an invalid
 #  RA, Dec, filter number, etc, it won't tell you.
 #
-#  BJW, Nov 29 2017
+#  BJW, Nov 29-30 2017
 #
 #  DONE: read input from file rather than interactive
 #  TODO: have it execute the script rather than asking the user to run w/sh
