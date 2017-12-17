@@ -16,14 +16,13 @@ if len(sys.argv) != 3:
     sys.exit()
 username, password = sys.argv[1:]
 
-prxy = rts2.rtsapi.createProxy("http://bigpop:8889", username=username, password=password)
+prxy = rts2.rtsapi.createProxy("http://localhost:8889", username=username, password=password )
 
-
-prxy.setValue( "SEL", "queue_only", 1 )
+prxy.setValue( "SEL", "queue_only", True )
 
 #sets to WESTEAST
-prxy.setValue( "SEL", "plan_queueing", 3 )
-prxy.setValue( "BIG61", "pec_state", 1 )
-prxy.setvalue( "EXEC", "auto_loop", False )
+prxy.setValue( "SEL", "plan_queing", 3 )
+prxy.setValue( "BIG61", "pec_state", True )
+prxy.setValue( "EXEC", "auto_loop", False )
 
 
