@@ -51,3 +51,16 @@ kp.process_and_merge_list(imagelist)
 If you read through the code, most of the routines are pretty modular so you can
 run individual routines, use only certain stages of the processing, etc.
 
+#kuiper_reduction package
+
+In order to make the kuiper_reduce module more friendly with RTS2, we
+created the kuiper_reduction package. This puts different parts 
+of the analysis in different modules in case you don't want to import 
+the entire analysis package. Also, its functions and methods operate
+directly on astropy fits fds rather than filenames. 
+
+
+```
+from kuiper_reduction.merge import merge_fitsfd
+merged_fd = merge_fitsfd( fitsfd )
+```
