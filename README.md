@@ -7,4 +7,4 @@ queue scheduling , remote observing, and automation of UAO telescopes.
 
 
 
-[Scott's RTS2 Fock](https://github.com/srswinde/rts2 "Scott's RTS2 fork.")
+[Scott's RTS2 Forck](https://github.com/srswinde/rts2 "Scott's RTS2 fork.")
