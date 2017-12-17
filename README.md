@@ -12,9 +12,9 @@ queue scheduling , remote observing, and automation of UAO telescopes.
 [Scott's RTS2 Forck](https://github.com/srswinde/rts2 "Scott's RTS2 fork.")
 
 
-##Helpfull Info
+## Helpfull Info
 
-###Where does RTS2 put data
+### Where does RTS2 put data
 The path to the image data is defined in the rts2.ini file 
 found in /etc/rts2/ directory. Currently you will see 
 
