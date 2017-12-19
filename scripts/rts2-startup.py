@@ -16,6 +16,9 @@ if len(sys.argv) != 3:
     sys.exit()
 username, password = sys.argv[1:]
 
+#create the RTS2 proxy.
+#This is a JSON http based interface
+#for communication with rts2. 
 prxy = rts2.rtsapi.createProxy("http://localhost:8889", username=username, password=password )
 
 prxy.setValue( "SEL", "queue_only", True )
