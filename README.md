@@ -14,6 +14,17 @@ queue scheduling , remote observing, and automation of UAO telescopes.
 
 ## Helpfull Info
 
+###Usefull links
+
+
+
+Useful links:
+
+[RTS2 homepage](http://rts2.org/index.html)   
+
+[AZCam Documentation](http://cameras.itl.arizona.edu/doku.php?id=azcam)
+
+
 ### Where does RTS2 put data
 The path to the image data is defined in the rts2.ini file 
 found in /etc/rts2/ directory. Currently you will see 
