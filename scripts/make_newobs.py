@@ -23,7 +23,99 @@
 
 import os
 import sys
+import rts2
 # from astropy.io import ascii
+
+class filter_set:
+    """Class to simplify look up of filter by name and number
+    
+
+    uses the python [] operator to lookup filter number
+    or name. If you give it the name it will return the 
+    number and vice versa. it also uses aliases for the
+    lookup. RTS2 and the Galil like to use long names
+    like "Harris-U" observers like short names like "U"
+    either format is acceptable as long as the alias 
+    is in the dictionary below. 
+    """
+
+
+    # Filter Name Aliases. 
+    # The keyword is the name of the filter as told by 
+    # the galil and RTS2, the value in the dict is a tupple
+    # of possible aliases for each filter
+    alias = {
+            "Harris-U": ("U"), 
+            "Harris-R": ("R"), 
+            "Harris-V": ("V"), 
+            "Arizona-I": ("I"), 
+            "Harris-"U"": ("B")
+            "Schott-8612": ("Schott")  }
+
+
+    def __init__(self, filters = None):
+        
+        if filters is None:
+            self._filter_list = []
+
+        elif type(filters) == list:
+            self._filter_list = filters
+
+        elif type(filters) == dict:
+            # this assumes that the keywords of the dictionary are 
+            # the fitler names and the value is the filter number. 
+
+            
+            #sort by filter number and reverse look up. 
+            for key, value in sorted(filters.iteritems(), key=lambda (k,v): (v,k)):
+                self._filter_list.append( key )
+
+        elif type(filters) == str or type(filters) == unicode:
+            self._filter_list = str(filters).split()
+
+        else:
+            raise TypeError("Unexpected filter type {}, type must be string, unicode, list or dict".format(type(filters)))
+
+
+    def check_alias( self, alias ):
+        
+        for name, aliases in self.alias.iteritems():
+            if alias.lower() == name.lower():
+                return alias
+
+            else:
+                for al in aliases:
+                    if al.lower() == alias.lower():
+                        return name
+
+        # we didn't find the alias
+        return None
+            
+    def __str__(self):
+        return "<filter_set: "+str(self._filter_list)+">"
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __getitem__(self, key):
+        if type(key) == int:
+            return self._filter_list[key]
+
+        elif type(key) == str or type(key) == unicode:
+            realname = self.check_alias(key)
+            if realname is not None:
+                return self._filter_list.index(realname)
+        raise ValueError( "cannot find filter {}".format(key) )
+
+        
+
+
+
+                
+
+
+            
+
 
 # This sets a default filter order, but it may be different between runs,
 # so be careful.  Current default order is U,R,B,V,I,Schott.
@@ -43,6 +135,15 @@ def set_filter_dict():
         filter_str = '%1i' % (i)
         filter_dict[filter_str] = i
     return filter_dict
+
+# This reads the filter order from the RTS2 proxy
+# and returns a dictionary similar to what 
+# set_filter_dict does:
+
+def get_filter_dict(prx_name, prx_passwd):
+    proxy = rts2.rtsapi.createProxy( "http://bigpop:8889", prx_name, prx_passwd  )
+    filters_str = proxy.getValue("W0", "filter_names", True)
+    return filter_set( filters_str )
 
 # Write the rts2-newtarget script. This is run taking input rather than
 # command line arguments, so I use the shell "<< EOF" syntax.
@@ -232,8 +333,8 @@ def main():
     return
 
 # This is the standard boilerplate that calls the main() function.
-if __name__ == '__main__':
-  main()
+#if __name__ == '__main__':
+  #main()
 
     
     
