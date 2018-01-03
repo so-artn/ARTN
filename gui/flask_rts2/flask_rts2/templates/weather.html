@@ -1,0 +1,40 @@
+
+
+
+<script>
+	
+(function get_boltwood()
+{
+
+$.ajax
+({
+  type: "GET",
+  url: "weather/boltwood.json",
+  dataType: 'json',
+  withCredentials : true,
+  data: '{ "comment" }',
+})
+	.done(
+	function(data){
+		$("span.boltwood-data").each(function()
+		{
+			var bwkey = $(this).attr("boltwood_name");
+			if(bwkey in data)
+			{
+				$(this).text(data[bwkey])
+			}
+		});
+	})
+	.always(function(){ setTimeout(get_boltwood, 5000); })
+})();
+
+</script>
+
+
+<span style="border:solid 1px white;display:inline-block;padding:10px;">
+	<h3>Boltwood Data</h3>
+	<span style="min-width:150px;display:inline-block">Humdity</span><span boltwood_name="iHumidity" class="boltwood-data"></span>
+</span>
+
+
+
