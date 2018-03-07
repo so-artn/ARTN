@@ -127,6 +127,7 @@ def rts2_queue_start():
     _set_rts2_value("SEL", "queue_only", True)
     _set_rts2_value("BIG61", "pec_state", 1)
     _set_rts2_value("EXEC", "auto_loop", False)
+    _set_rts2_value("BIG61", "dome_auto", True)
 
 
 @app.route('/lastimg')
