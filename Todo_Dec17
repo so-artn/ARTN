@@ -8,3 +8,10 @@ To do list for the Dec 1-5 ARTN Engineering Run
 5. Progress towards automatically taking: autofocus / flats / standards / etc.
 6.  Test Ben's script for adding a target to the rts queue.
 7. Work on making filter identification robust for ARTN use.
+
+New to-do from the night of 12-3 to 12-4 2017
+8. Correct window size in camera driver.
+9. Correct binning on startup
+10. Put Scott’s version of rts2 onto the artn GitHub page
+11. Add dithering into flat script
+12. Need to turn on PEC with RTS2, as default.

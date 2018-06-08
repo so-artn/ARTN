@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	
+
+{% include "bootstrap_top.html" %}
+
+
+<style>
+	body
+	{
+		background-color:#dbd8dd;
+		margin:15px;
+	}
+	span.rts2_label
+	{
+		min-width:150px;
+		max-width:150px;
+		display:inline-block;
+	}
+	div.val_row
+	{
+		padding:5px;
+	}
+</style>
+
+
+
+</head>
+
+<body>
+		<div id="rts2_status" >
+			 {% include "rts2_status.html"  %} 
+		</div>
+
+		<div id="weather" class="tab-pane fade in active" >
+			 {% include "weather.html"  %} 
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+gui/flask_rts2/build/
+mont4k_pipeline/build/
+**/*.swp
+*.swp
+junk
+**/*.pyc
+
+
+
+

@@ -33,12 +33,28 @@
 # needed for py notebook only?
 # %matplotlib inline
 
+import sys
+
+
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-from astropy.modeling import models
+try:
+    if sys.argv[1] == "modeling":
+        from astropy.modeling import models
+        modeling = True
+    else:
+        modeling = False
+except Exception as err:
+    modeling = False
+    print err
+
+
 from astropy import units as u
-from astropy import nddata
+
+#Take a loooong time to load
+#from astropy import nddata
 from astropy.io import fits
 
 import ccdproc
@@ -51,7 +67,7 @@ import bottleneck as bn
 
 from msumastro import ImageFileCollection, TableTree
 
-nddata.conf.warn_unsupported_correlated = False
+#nddata.conf.warn_unsupported_correlated = False
 
 # Adjust for instrument, or calculate values?
 gain = 3.17 * u.electron / u.adu
@@ -300,7 +316,11 @@ def oscan_trim_file(fname):
      data1 = ccdproc.CCDData(hdulist[i].data, unit="adu")
      data1.header = hdulist[i].header
      # What happens if file is already overscan-subtracted?
-     oscan1 = ccdproc.subtract_overscan(data1, fits_section=data1.header['BIASSEC'], add_keyword={'overscan': True, 'calstat': 'O'}, model=models.Polynomial1D(1))
+     if modeling:
+        oscan1 = ccdproc.subtract_overscan(data1, fits_section=data1.header['BIASSEC'], add_keyword={'overscan': True, 'calstat': 'O'}, model=models.Polynomial1D(1))
+     else:
+        oscan1 = ccdproc.subtract_overscan(data1, fits_section=data1.header['BIASSEC'], add_keyword={'overscan': True, 'calstat': 'O'}, model=None)
+        
      trim1 = ccdproc.trim_image(oscan1, fits_section=oscan1.header['TRIMSEC'], add_keyword={'trimmed': True, 'calstat': 'OT'})
      fits.update(fname, trim1.data, header=trim1.header, ext=i)
   hdulist.close()
@@ -627,14 +647,9 @@ def merge_m4k_list(imagelist,raw_dir="raw",merged_dir="merged"):
         os.mkdir(merged_dir)
     for fname in imagelist:
         hdulist = fits.open(fname)
-        data1 = ccdproc.CCDData(hdulist[1].data, unit="adu")
-        data1.header = hdulist[1].header
-        data2 = ccdproc.CCDData(hdulist[2].data, unit="adu")
-        merged = np.concatenate( (data1, np.fliplr(data2) ), axis=1)
-        # assume we don't have to change any WCS parameters from ext 1
-        hdu_new = fits.PrimaryHDU( merged )
-        hdu_new.header = hdulist[0].header
-        hdulist_new = fits.HDUList( [hdu_new] )
+
+        hdulist_new = merge_m4k_one_img(hdulist)
+
         # Use basename to keep from breaking if the names in imagelist are
         # full path rather than just a file
         fname_base = os.path.basename(fname)
@@ -649,6 +664,28 @@ def merge_m4k_list(imagelist,raw_dir="raw",merged_dir="merged"):
         mylog("merge_m4k_list: wrote merged image {0}".format(newname))
     #
     return
+
+
+# Extracted these lines for merging M4k Data
+# from merge_m4k_list so we can merge one
+# image at a time. This will play nice 
+# with RTS2.
+# 
+# -Scott Swindell 12-4-2017
+# 
+def merge_m4k_one_img(hdulist):
+    hdulist = fits.open(fname)
+    data1 = ccdproc.CCDData(hdulist[1].data, unit="adu")
+    data1.header = hdulist[1].header
+    data2 = ccdproc.CCDData(hdulist[2].data, unit="adu")
+    merged = np.concatenate( (data1, np.fliplr(data2) ), axis=1)
+    # assume we don't have to change any WCS parameters from ext 1
+    hdu_new = fits.PrimaryHDU( merged )
+    hdu_new.header = hdulist[0].header
+    hdulist_new = fits.HDUList( [hdu_new] )
+
+    return hdulist_new
+
 
 # Process all the images and merge only the objects
 def process_and_merge_list(imagelist):
