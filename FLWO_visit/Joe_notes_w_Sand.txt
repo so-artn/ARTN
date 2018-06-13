@@ -1,0 +1,49 @@
+These are a collection of Joe's great notes from the FLWO visit, with
+some Sand flavor.  Most of this pertains to the robotic 48-in
+
+#############
+General Operation
+#############
+
+Almost always run in robotic mode, although it is used classically one
+week per year by a Harvard astro class.
+
+#############
+Weather, Safety & Security
+#############
+
+They use security codes/pads for security.  Not much beyond this, and
+not too much human safety.
+
+They do not get a lot of foot traffic -- certainly less than Bigelow.
+
+No real lightning shutdown procedure.  Although they do have a 30 ft. lightning rod next door, and rods on the dome.  The also try to not use copper in favor of optical fiber whenever possible.
+
+There is always an operator next door at the 60-in -- this person
+intervenes if something goes wrong.
+
+They use an Aurora weather station rather than a Boltwood -- they say
+the sky temperature is more reliable and thhat they use this as a
+factor in weather shutdowns.
+
+
+############
+Calibration
+############
+
+Take both dome and twilight flats, robotically.
+
+Standard star data also seems to be taken robotically on a regular basis.
+
+They monitor the sky brightness quite closely, in conjunction with the
+local copper mine.  This seems more like a hobby of Emilio's.
+
+############
+Archive and Data Reduction
+############
+
+Archive data at the CfA at the end of the night; nothing in real time.
+
+No data reduction is done, but all calibration data is provided.
+
+Almost no data quality assurance -- would rely on user feed back.
