@@ -1,12 +1,29 @@
 Hi Dave,
 
-The by-the-book method would be to follow the guidelines in the NFPA 780: Standard for the Installation of Lightning Protection Systems.  It basically recommends setting up lightning rods at certain heights above what you want to protect to create zones of protection.
+The by-the-book method would be to follow the guidelines in the NFPA
+780: Standard for the Installation of Lightning Protection Systems.
+It basically recommends setting up lightning rods at certain heights
+above what you want to protect to create zones of protection.
 
-We ended up not doing that and decided that we have a steel dome with steel walls that creates a decent faraday cage.  There is a buried ground ring around each dome.  The walls are bonded to the ring and to ground via the concrete pad (ufer ground).  The dome is bonded to the ring via cable to slipring brushes that contact the exterior bottom edge of the dome.  Our other buildings are steel storage containers so same thing.
+We ended up not doing that and decided that we have a steel dome with
+steel walls that creates a decent faraday cage.  There is a buried
+ground ring around each dome.  The walls are bonded to the ring and to
+ground via the concrete pad (ufer ground).  The dome is bonded to the
+ring via cable to slipring brushes that contact the exterior bottom
+edge of the dome.  Our other buildings are steel storage containers so
+same thing.
 
-Each ground ring is bonded to the other rings at each site.  The only other galvanic connections between buildings are the power wires.  All signal is done via fiber.
+Each ground ring is bonded to the other rings at each site.  The only
+other galvanic connections between buildings are the power wires.  All
+signal is done via fiber.
 
-Also, there are surge protection devices (SPD) in each panel that receives or sends power at each building.  It's much more common to experience surge events from lightning via the incoming mains power than to actually have your building get hit by lightning so this is quite important.  The SPD's on the mains should be a heavy duty type and then the farther down your power system the SPD's can be a lighter duty.
+Also, there are surge protection devices (SPD) in each panel that
+receives or sends power at each building.  It's much more common to
+experience surge events from lightning via the incoming mains power
+than to actually have your building get hit by lightning so this is
+quite important.  The SPD's on the mains should be a heavy duty type
+and then the farther down your power system the SPD's can be a lighter
+duty.
 
 I hope that helps, I'm glad to answer any further questions.
 
