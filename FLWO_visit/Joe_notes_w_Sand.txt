@@ -8,6 +8,16 @@ General Operation
 Almost always run in robotic mode, although it is used classically one
 week per year by a Harvard astro class.
 
+RTS2 is the heart of the operation.  They seem to use some GUIs that
+are useful that we do not currently use.
+
+They have a single imager as their instrument. They do run the guider
+along side it, using RTS2.
+
+They actively cool the mirror to ambient via 26 sensors.
+
+They auto fill the dewar, and it runs on a timer.  We should do this!
+
 #############
 Weather, Safety & Security
 #############
@@ -17,7 +27,9 @@ not too much human safety.
 
 They do not get a lot of foot traffic -- certainly less than Bigelow.
 
-No real lightning shutdown procedure.  Although they do have a 30 ft. lightning rod next door, and rods on the dome.  The also try to not use copper in favor of optical fiber whenever possible.
+No real lightning shutdown procedure.  Although they do have a 30
+ft. lightning rod next door, and rods on the dome.  The also try to
+not use copper in favor of optical fiber whenever possible.
 
 There is always an operator next door at the 60-in -- this person
 intervenes if something goes wrong.
@@ -26,6 +38,9 @@ They use an Aurora weather station rather than a Boltwood -- they say
 the sky temperature is more reliable and thhat they use this as a
 factor in weather shutdowns.
 
+The system will send an email alarm if the camera warms up, or if no
+data was taken in the last hour.
+
 
 ############
 Calibration
@@ -33,10 +48,30 @@ Calibration
 
 Take both dome and twilight flats, robotically.
 
+They run a focus routine every night.  Once best focus is found, they
+then adjust focus the rest of the night based on the temperature.
+
+Pointing is tuned up nightly using astrometry.net.
+
 Standard star data also seems to be taken robotically on a regular basis.
 
 They monitor the sky brightness quite closely, in conjunction with the
 local copper mine.  This seems more like a hobby of Emilio's.
+
+
+###########
+Scheduling & Timekeeping
+###########
+
+Mosty nights are still assigned classically.  On your given night, you
+VNC into the RTS2 computer and upload your schedule.  If there are
+gaps in your night, data is taken from a large pool of backup objects.
+
+They rely on an 'honor system' so that people do not take more time
+than they are allocated.  This is barely policed.
+
+
+
 
 ############
 Archive and Data Reduction
@@ -47,3 +82,11 @@ Archive data at the CfA at the end of the night; nothing in real time.
 No data reduction is done, but all calibration data is provided.
 
 Almost no data quality assurance -- would rely on user feed back.
+
+###########
+Known Problems
+###########
+
+Very few.  Occasionally the telescope will run into a limit, and must
+be recovered by the 60-in operator.
+
