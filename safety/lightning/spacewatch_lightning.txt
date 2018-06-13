@@ -1,0 +1,46 @@
+Yes, we have detailed procedures for lightning shutdowns.
+I'll send them to you.  They involve shutting down and
+unplugging the cameras and most of the computers as well
+as throwing some breakers.  We leave our gateway machines
+and weather station computer up for convenience, relying
+on the surge protectors and the UPSes.  In 35 years of
+operation we've had about 3 lightning events that cost us
+about $10K-$20K total to replace equipment.  
+
+
+#####################
+
+Just checked old email; we've had about 6 episodes of lightning
+damage since 1983.  Total replacement cost ~$20K.  The equipment
+that gets damaged, even when 110 vac cords are unplugged, are
+things like comm cards in computers, devices on long signal cables,
+phone lines, etc.  We do not unplug all the comms and signal 
+cables because there are too many of them and some have many delicate 
+pins and/or elaborate RF shields that don't take cycling in & out
+too well, especially by non-engineer observers.  In recent times
+we've tried to install fiber optic media converters and opto
+isolators wherever possible.  We also protect our branch service
+panels with those pricey wall-mounted Transtector(R) surge protectors
+as well as those cheapo sacrificial MOVs across the input
+voltage.  But we've still had damage to soft electronics by induced
+currents.
+
+The biggest loss to lightning at an observatory that I know about
+occurred at Wyoming in 1978.  They had unplugged everything, but
+the current induced in a coiled-up 110 vac power cord by the
+magnetic flux from a strike fried everything in a whole rack
+of electronics.
+
+The (new?) Mt. Hopkins practice of not unplugging anything will
+not end well.  I can only guess that their engineers are young
+& inexperienced.  The great difficulty with lightning damage
+is that some circuits are only weakened and not put out of
+action right away.  The effects of lightning can persist as
+intermittent mysterious problems for months after, draining
+manpower to track down.  State of AZ Risk Mgmt also has a high
+deductible threshold now on insurance reimbursement for lightning
+damage.  When you can get reimbursed, you only get the depreciated
+value of the equipment and can't use the money for anything
+except an exact replacement.  
+
+Good luck!
