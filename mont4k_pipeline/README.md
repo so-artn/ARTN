@@ -57,50 +57,50 @@ goes through these routines:
 - getheaders
 - create imagelist
 - process_and_merge_list
-    process_list
-        makelists
-        oscan_trim_list(zerolist)
-	    oscan_trim_file
-	        ccdproc.subtract_overscan
-		ccdproc.trim_image
-        make_master_bias
-        oscan_trim_list(domelist)
-	    oscan_trim_file
-	        ccdproc.subtract_overscan
-		ccdproc.trim_image
-	bias_list_by_file(domelist,masterbiasname)
-	    bias_file_by_file
-	        ccdproc.subtract_bias
-	make_master_flats(domelist, ...)
-            make_master_oneflat
-	        combine_list_to_file
-		    ccdproc.Combiner
-	oscan_trim_list(skylist)
-	    oscan_trim_file
-	        ccdproc.subtract_overscan
-		ccdproc.trim_image
-	bias_list_by_file(skylist,masterbiasname)
-	    bias_file_by_file
-	        ccdproc.subtract_bias
-	make_master_flats(skylist, ...)
-            make_master_oneflat
-	        combine_list_to_file
-		    ccdproc.Combiner
-	oscan_trim_list(objectlist)
-	    oscan_trim_file
-	        ccdproc.subtract_overscan
-		ccdproc.trim_image
-	proc_objects_all(objectlist, masterbiasname, flatnames)
-            find_filters_list
-	    proc_objects_filter
-	        bias_file_by_file(fname, master_bias)
-	            ccdproc.subtract_bias
-	        flat_file_by_file(fname, master_flat)
-		    ccdproc.flat_correct
-                 renormalize_by_flat *This should be either used or deprecated since ccdproc.flat_correct can now take a flat scale as input*
+    - process_list
+        - makelists
+        - oscan_trim_list(zerolist)
+	    - oscan_trim_file
+	        - ccdproc.subtract_overscan
+		- ccdproc.trim_image
+        - make_master_bias
+        - oscan_trim_list(domelist)
+	    - oscan_trim_file
+	        - ccdproc.subtract_overscan
+		- ccdproc.trim_image
+	- bias_list_by_file(domelist,masterbiasname)
+	    - bias_file_by_file
+	        - ccdproc.subtract_bias
+	- make_master_flats(domelist, ...)
+            - make_master_oneflat
+	        - combine_list_to_file
+		    - ccdproc.Combiner
+	- oscan_trim_list(skylist)
+	    - oscan_trim_file
+	        - ccdproc.subtract_overscan
+		- ccdproc.trim_image
+	- bias_list_by_file(skylist,masterbiasname)
+	    - bias_file_by_file
+	        - ccdproc.subtract_bias
+	- make_master_flats(skylist, ...)
+            - make_master_oneflat
+	        - combine_list_to_file
+		    - ccdproc.Combiner
+	- oscan_trim_list(objectlist)
+	    - oscan_trim_file
+	        - ccdproc.subtract_overscan
+		- ccdproc.trim_image
+	- proc_objects_all(objectlist, masterbiasname, flatnames)
+            - find_filters_list
+	    - proc_objects_filter
+	        - bias_file_by_file(fname, master_bias)
+	            - ccdproc.subtract_bias
+	        - flat_file_by_file(fname, master_flat)
+		    - ccdproc.flat_correct
+                 - renormalize_by_flat *This should be either used or deprecated since ccdproc.flat_correct can now take a flat scale as input*
 
-    merge_m4k_list (specific to the Mont4K 2-readout geometry)
-        merge_m4k_one_img
+    - merge_m4k_list (specific to the Mont4K 2-readout geometry)
+        - merge_m4k_one_img
 
 
 
