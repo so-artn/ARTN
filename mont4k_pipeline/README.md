@@ -62,7 +62,7 @@ goes through these routines:
     - oscan_trim_list(zerolist)
       - oscan_trim_file
         - ccdproc.subtract_overscan
-	-  ccdproc.trim_image
+	- ccdproc.trim_image
     - make_master_bias
     - oscan_trim_list(domelist)
       - oscan_trim_file
