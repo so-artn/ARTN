@@ -107,7 +107,7 @@ goes through these routines:
 
 
 
-#kuiper_reduction package
+# kuiper_reduction package
 
 In order to make the kuiper_reduce module more friendly with RTS2, we
 created the kuiper_reduction package. This puts different parts 
