@@ -1,0 +1,3 @@
+No real lightning shutdown procedure.  Although they do have a 30
+ft. lightning rod next door, and rods on the dome.  The also try to
+not use copper in favor of optical fiber whenever possible.
