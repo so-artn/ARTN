@@ -48,7 +48,9 @@ try:
         modeling = False
 except Exception as err:
     modeling = False
-    print err
+    # disable printing because it prints an error on import if you
+    # didn't have a command line argument
+    # print err
 
 
 from astropy import units as u
@@ -180,25 +182,34 @@ def getheaders(filelist,dir='',allfitsfiles=False):
             hdus = fits.open(fullname)
             # get file header
             hdr = hdus[0].header
-            # if there is more than 1 hdu, use hdu=1 for the data
-            ndhus = len(hdus)
-            # ihdudata = 0
-            #if nhdus > 1 :
-            ihdudata = 1
-                 # hdr1 = hdus[ihdudata].header
+            # if there is more than 1 hdu, use hdu=1 for the data and header
+            nhdus = len(hdus)
+            ihdudata = 0
+            if nhdus > 1 :
+                ihdudata = 1
+                hdr = hdus[ihdudata].header
             # do simple image statistics to get mean and rms of image
             # No data may yield a nan
             mean1 = np.mean(hdus[ihdudata].data)
             # median1 = np.median(hdus[1].data)
             rms1 = np.std(hdus[ihdudata].data)        
             # get each keyword and put into structure
-            struct1 = {'filename':file, 'title':hdr['object'], 'nextend':hdr['nextend'],
-                    'ut':hdr['ut'], 'ra':hdr['ra'], 'dec':hdr['dec'],
-                   'equinox':hdr['equinox'], 'azimuth':hdr['azimuth'], 'elev':hdr['elevat'],
-                   'airmass':hdr['airmass'], 'filter':hdr['filter'], 'exptime':hdr['exptime'],
-                   'imtype':hdr['imagetyp'], 'mean':mean1, 'rms':rms1 }
+            #struct1 = {'filename':file, 'title':hdr['object'], 'nextend':hdr['nextend'],
+            #        'ut':hdr['ut'], 'ra':hdr['ra'], 'dec':hdr['dec'],
+            #       'equinox':hdr['equinox'], 'azimuth':hdr['azimuth'], 'elev':hdr['elevat'],
+            #       'airmass':hdr['airmass'], 'filter':hdr['filter'], 'exptime':hdr['exptime'],
+            #       'imtype':hdr['imagetyp'], 'mean':mean1, 'rms':rms1 }
 
-                    #'nx':hdr['naxis1'],'ny':hdr['naxis2'], 'bin':hdr['ccdsum'],
+            #        #'nx':hdr['naxis1'],'ny':hdr['naxis2'], 'bin':hdr['ccdsum'],
+            # remove a few headers that may be less needed / common
+            try:
+                struct1 = {'filename':file, 'title':hdr['object'], 
+                      'ut':hdr['ut'], 'ra':hdr['ra'], 'dec':hdr['dec'],
+                      'airmass':hdr['airmass'], 'filter':hdr['filter'], 'exptime':hdr['exptime'],
+                      'imtype':hdr['imagetyp'], 'mean':mean1, 'rms':rms1 }
+            except:
+                print 'Error getting some header fields from ',fullname
+                struct1 = {'filename':file}
             outstruct.append(struct1)
             hdus.close()
         except:
@@ -322,6 +333,7 @@ def oscan_trim_file(fname,datahdus=0):
      data1 = ccdproc.CCDData(hdulist[i].data, unit="adu")
      data1.header = hdulist[i].header
      # What happens if file is already overscan-subtracted?
+     # We should probably default to using a model
      if modeling:
         oscan1 = ccdproc.subtract_overscan(data1, fits_section=data1.header['BIASSEC'], add_keyword={'overscan': True, 'calstat': 'O'}, model=models.Polynomial1D(1))
      else:
@@ -366,6 +378,8 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median',
 	hdulist = fits.open(fname)
 	if ifirst == True:
             try:
+                # This should propagate header and any HDUs that don't 
+                # get combined (ie are not in datahdus list) to the output.
                 hdulist.writeto(outname)
             except:
                 mylog('Failed write, trying to overwrite: {0}'.format(outname))
@@ -405,8 +419,6 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median',
         # fits.update(outname, output1.data, ext=i)
         # copying header from the first input image works.
         fits.update(outname, output1.data, header=tmplist[0].header, ext=i)
-        # If there are non-image HDUs, they will likely not be propagated
-        # into the output.  This should be fixed.
     mylog("Combined to output file {0}".format(outname))
     return
 
