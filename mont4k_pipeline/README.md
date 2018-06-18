@@ -17,6 +17,11 @@ from other instruments. This may be useful for others, since astropy's ccdproc
 doesn't natively support multi-extension FITS files, so the convenience
 routines in this pipeline had to be written to run on MEFs.
 
+Development of this pipeline was done for the Arizona Robotic Telescope Network
+(ARTN) project; if you find the code useful, an acknowledgment and 
+citation to the ARTN SPIE paper (B. Weiner et al, 2018 SPIE Telescopes and Instrumentation
+to appear) is appreciated.
+
 Possibly to be added:
 
 * sky flat / illumination correction
