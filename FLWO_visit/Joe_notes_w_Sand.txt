@@ -11,6 +11,12 @@ week per year by a Harvard astro class.
 RTS2 is the heart of the operation.  They seem to use some GUIs that
 are useful that we do not currently use.
 
+Those GUIs are maintained here:
+https://github.com/RTS2/rts2-gtk
+and the new version in QT here:
+https://github.com/RTS2/rts2-qt
+
+
 They have a single imager as their instrument. They do run the guider
 along side it, using RTS2.
 
