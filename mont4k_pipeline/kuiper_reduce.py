@@ -53,8 +53,8 @@ except Exception as err:
     # disable printing because it prints an error on import if you
     # didn't have a command line argument
     # print err
-
-
+    
+    
 from astropy import units as u
 
 #Take a loooong time to load
@@ -138,7 +138,7 @@ def save_images(images,prefix):
 
 # Convenience function for logging.  Could be print or output to file
 def mylog(mystring):
-    print mystring
+    print(mystring)
     return
 
 #####
@@ -210,12 +210,12 @@ def getheaders(filelist,dir='',allfitsfiles=False):
                       'airmass':hdr['airmass'], 'filter':hdr['filter'], 'exptime':hdr['exptime'],
                       'imtype':hdr['imagetyp'], 'mean':mean1, 'rms':rms1 }
             except:
-                print 'Error getting some header fields from ',fullname
+                print('Error getting some header fields from ',fullname)
                 struct1 = {'filename':file}
             outstruct.append(struct1)
             hdus.close()
         except:
-            print 'Error opening file: ',fullname
+            print('Error opening file: ',fullname)
         
     # more stuff?
     mylog("getheaders: Got headers for {0} files".format(nfiles))
@@ -256,19 +256,19 @@ def makelists(imstruct):
             if immean < zeromax:
                 zerolist.append(fname)
             else:
-                print 'makelists Warning: zero with counts>',zeromax,fname
+                print('makelists Warning: zero with counts>',zeromax,fname)
                 badlist.append(fname)
         elif imtype == 'dark' and exptime>0.1:
             if immean < darkmax:
                 darklist.append(fname)
             else:
-                print 'makelists Warning: dark with counts>',darkmax,fname
+                print('makelists Warning: dark with counts>',darkmax,fname)
                 badlist.append(fname)
         elif imtype == 'flat' and exptime>0.1:
             if immean > flatmin:
                 domelist.append(fname)
             else:
-                print 'makelists Warning: flat with counts<',flatmin,fname
+                print('makelists Warning: flat with counts<',flatmin,fname)
                 badlist.append(fname)
         elif imtype == 'object':
             if immean < objectmax:
@@ -276,17 +276,17 @@ def makelists(imstruct):
                 # check for Landolt or standard in image title
                 ifstd = ('landolt' in title.lower() or 'standard' in title.lower())
                 if ifstd:
-                    print 'makelists: standard field ',fname
+                    print('makelists: standard field ',fname)
                     stdlist.append(fname)
             else:
-                print 'makelists Warning: object with counts>',objectmax,fname
+                print('makelists Warning: object with counts>',objectmax,fname)
                 if immean > skyflatmin:
                     skylist.append(fname)
-                    print 'makelists: using as skyflat object with counts>',skyflatmin,fname
+                    print('makelists: using as skyflat object with counts>',skyflatmin,fname)
                 else:
                     badlist.append(fname)
         else:
-            print 'makelists: Warning: didnt understand image type for ',fname
+            print('makelists: Warning: didnt understand image type for ',fname)
             badlist.append(fname)
 
     # print lists to files?
@@ -327,7 +327,7 @@ def oscan_trim_file(fname,datahdus=0):
   else:
       istart = 0
   # loop from first-data to last HDU, unless datahdus is set
-  hduindexes = range(nhdus)[istart:]
+  hduindexes = list(range(nhdus))[istart:]
   if datahdus != 0:
       hduindexes = datahdus
   for i in hduindexes :
@@ -394,7 +394,7 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median',
             istart = 1
         else:
             istart = 0
-        hduindexes = range(nhdus)[istart:]
+        hduindexes = list(range(nhdus))[istart:]
         if datahdus != 0:
             hduindexes = datahdus
         for i in hduindexes :
@@ -433,7 +433,7 @@ def bias_file_by_file(fname,biasname,datahdus=0):
         istart = 1
     else:
         istart = 0
-    hduindexes = range(nhdus)[istart:]
+    hduindexes = list(range(nhdus))[istart:]
     if datahdus != 0:
         hduindexes = datahdus
     for i in hduindexes :
@@ -468,7 +468,7 @@ def flat_file_by_file(fname,flatname,datahdus=0):
         istart = 1
     else:
         istart = 0
-    hduindexes = range(nhdus)[istart:]
+    hduindexes = list(range(nhdus))[istart:]
     if datahdus != 0:
         hduindexes = datahdus
     for i in hduindexes :
@@ -526,7 +526,7 @@ def make_master_flats(listname,flat_prefix='Flat_',filter_key='FILTER',read_from
     for name in filters_uniq:
         # find matching filenames and make list
         # flatlist1 = filter_name_dict[name]
-        flatlist1 = [fname for fname, filt in filter_name_dict.items() if filt == name]
+        flatlist1 = [fname for fname, filt in list(filter_name_dict.items()) if filt == name]
         # remove any spaces from filter name
         filtnamesquash = name.replace(" ","")
         outname = flat_prefix + filtnamesquash + '.fits'
@@ -560,7 +560,7 @@ def find_filters_list(flist,filter_key='FILTER'):
     filters_uniq = list( set( filter_name_dict.values() ) )
     mylog("find_filters_list made a dictionary and found filters: ")
     # print filter_name_dict
-    print filters_uniq
+    print(filters_uniq)
     return filter_name_dict, filters_uniq
 
 # ccdproc.flat_correct automatically normalizes by the mean of the flat,
@@ -582,7 +582,7 @@ def renormalize_by_flat(image,flat,read_from_file=False,datahdus=0):
         mylog("Don't need to renormalize a 1-extension flat, returning")
         return
     secmeans = np.zeros(nhdus-1)
-    hduindexes = range(nhdus)[1:]
+    hduindexes = list(range(nhdus))[1:]
     if datahdus != 0:
         hduindexes = datahdus
     for i in hduindexes :
@@ -634,9 +634,9 @@ def proc_objects_all(imagelist, master_bias, flatlist,datahdus=0):
     filter_name_dict, filters_uniq = find_filters_list(imagelist)
     flat_name_dict, flat_filters_uniq = find_filters_list(flatlist)
     for filter1 in filters_uniq:
-        objlist1 = [fname for fname, filt in filter_name_dict.items() if filt == filter1]
+        objlist1 = [fname for fname, filt in list(filter_name_dict.items()) if filt == filter1]
         if filter1 in flat_filters_uniq:
-            flats_match = [fname for fname, filt in flat_name_dict.items() if filt == filter1]
+            flats_match = [fname for fname, filt in list(flat_name_dict.items()) if filt == filter1]
             # if more than one flat matches, which is unlikely, take the first
             flat_match = flats_match[0]
             proc_objects_filter(objlist1, master_bias, flat_match,datahdus=datahdus)
