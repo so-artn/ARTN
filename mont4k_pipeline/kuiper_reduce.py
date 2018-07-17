@@ -6,7 +6,7 @@
 # http://nbviewer.jupyter.org/gist/mwcraig/06060d789cc298bbb08e
 # with modifications to handle multi-extension FITS files
 #
-# I wrote code to test the image values and automatically group images into 
+# I wrote code to test the image values and automatically group images into
 # bias, flat, skyflat, object - it's in ~/python/ccdreduce/makelists.py
 # and have inserted that into this file now.
 
@@ -15,7 +15,7 @@
 # To run this, to process all the image files in your current directory, try:
 #
 # python
-# import sys 
+# import sys
 # sys.path.append('/Users/bjw/stellarview/python') [use whatever directory you put the kuiper_reduce.py file in]
 # import kuiper_reduce as kp
 # fstruct = kp.getheaders('')
@@ -26,7 +26,7 @@
 
 
 # Requires astropy, and ccdproc,
-# also requires msumastro and bottleneck, 
+# also requires msumastro and bottleneck,
 # but the dependencies on the latter two could probably be removed
 # Try running pip install ccdproc, etc, at the command line to install.
 
@@ -53,8 +53,8 @@ except Exception as err:
     # disable printing because it prints an error on import if you
     # didn't have a command line argument
     # print err
-    
-    
+
+
 from astropy import units as u
 
 #Take a loooong time to load
@@ -96,7 +96,7 @@ def avg_over_images(masked_arr, axis=0):
 
 def med_over_images(masked_arr, axis=0):
     """
-    Calculate median pixel value along specified axis    
+    Calculate median pixel value along specified axis
     Uses bottleneck.nanmedian for speed
     """
     dat = masked_arr.data.copy()
@@ -112,7 +112,7 @@ def plot_image(image, scale):
     plt.imshow(image, vmax=plotmax, vmin=plotmin)
     # need to write the plot out somehow
     return
-    
+
 # image statistics
 imstats = lambda dat: (dat.min(), dat.max(), dat.mean(), dat.std())
 
@@ -131,7 +131,7 @@ def save_images(images,prefix):
         newname = prefix + fname_base
         try:
             im_hdu_list.writeto(newname)
-        except: 
+        except:
             mylog('Failed write, trying to overwrite: {0}'.format(newname))
             im_hdu_list.writeto(newname,overwrite=True)
     return
@@ -171,12 +171,12 @@ def getheaders(filelist,dir='',allfitsfiles=False):
         for name in allfilelist:
             if os.path.isfile(name) and name.endswith('.fits'):
                 filelist.append(name)
-    
+
     # read in header translation fields as dictionary
     # initialize dictionary structure
     outstruct = []
     nfiles = len(filelist)
-    
+
     for file in filelist:
         fullname = os.path.join(dir,file)
         # use extension 0 or 1? 0 for header, 1 for data?
@@ -194,7 +194,7 @@ def getheaders(filelist,dir='',allfitsfiles=False):
             # No data may yield a nan
             mean1 = np.mean(hdus[ihdudata].data)
             # median1 = np.median(hdus[1].data)
-            rms1 = np.std(hdus[ihdudata].data)        
+            rms1 = np.std(hdus[ihdudata].data)
             # get each keyword and put into structure
             #struct1 = {'filename':file, 'title':hdr['object'], 'nextend':hdr['nextend'],
             #        'ut':hdr['ut'], 'ra':hdr['ra'], 'dec':hdr['dec'],
@@ -205,7 +205,7 @@ def getheaders(filelist,dir='',allfitsfiles=False):
             #        #'nx':hdr['naxis1'],'ny':hdr['naxis2'], 'bin':hdr['ccdsum'],
             # remove a few headers that may be less needed / common
             try:
-                struct1 = {'filename':file, 'title':hdr['object'], 
+                struct1 = {'filename':file, 'title':hdr['object'],
                       'ut':hdr['ut'], 'ra':hdr['ra'], 'dec':hdr['dec'],
                       'airmass':hdr['airmass'], 'filter':hdr['filter'], 'exptime':hdr['exptime'],
                       'imtype':hdr['imagetyp'], 'mean':mean1, 'rms':rms1 }
@@ -216,7 +216,7 @@ def getheaders(filelist,dir='',allfitsfiles=False):
             hdus.close()
         except:
             print('Error opening file: ',fullname)
-        
+
     # more stuff?
     mylog("getheaders: Got headers for {0} files".format(nfiles))
 
@@ -245,7 +245,7 @@ def makelists(imstruct):
 
     # read in optional parameters for instrument to override defaults
     # for flatmin, etc?
-    
+
     for image in imstruct:
         imtype = image['imtype']
         fname = image['filename']
@@ -300,7 +300,7 @@ def makelists(imstruct):
     mylog("makelists: Made the *.list files")
 
     # subset lists by binning and filters?
-    
+
     return zerolist,domelist,skylist,objectlist,stdlist,badlist
 
 # This will create/overwrite files
@@ -340,7 +340,7 @@ def oscan_trim_file(fname,datahdus=0):
         oscan1 = ccdproc.subtract_overscan(data1, fits_section=data1.header['BIASSEC'], add_keyword={'overscan': True, 'calstat': 'O'}, model=models.Polynomial1D(1))
      else:
         oscan1 = ccdproc.subtract_overscan(data1, fits_section=data1.header['BIASSEC'], add_keyword={'overscan': True, 'calstat': 'O'}, model=None)
-        
+
      trim1 = ccdproc.trim_image(oscan1, fits_section=oscan1.header['TRIMSEC'], add_keyword={'trimmed': True, 'calstat': 'OT'})
      fits.update(fname, trim1.data, header=trim1.header, ext=i)
   hdulist.close()
@@ -352,7 +352,7 @@ def oscan_trim_list(filelist,datahdus=0):
     for fname in filelist:
         oscan_trim_file(fname,datahdus=datahdus)
     return
-        
+
 # overscan, trim, combine with sigma clipping
 
 # combine a multi ext fits file. First we get all the data into combine_list,
@@ -376,20 +376,20 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median',
     combine_list = []
     ifirst = True
     for line in flist:
-    	fname = line.strip()
-	hdulist = fits.open(fname)
-	if ifirst == True:
-            try:
-                # This should propagate header and any HDUs that don't 
-                # get combined (ie are not in datahdus list) to the output.
-                hdulist.writeto(outname)
-            except:
-                mylog('Failed write, trying to overwrite: {0}'.format(outname))
-                hdulist.writeto(outname,overwrite=True)
-            ifirst = False
+        fname = line.strip()
+    hdulist = fits.open(fname)
+    if ifirst == True:
+        try:
+            # This should propagate header and any HDUs that don't
+            # get combined (ie are not in datahdus list) to the output.
+            hdulist.writeto(outname)
+        except:
+            mylog('Failed write, trying to overwrite: {0}'.format(outname))
+            hdulist.writeto(outname,overwrite=True)
+        ifirst = False
         nhdus = len(hdulist)
         # Data of this image will be listed in a single entry in combine_list
-	tmplist = []
+        tmplist = []
         if nhdus > 1:
             istart = 1
         else:
@@ -405,12 +405,13 @@ def combine_list_to_file(listname,outname,read_from_file=False,combine='median',
             tmplist.append(data1)
             # combine_list.append(ccdproc.CCDData(data=data1, meta=head1, unit="adu"))
         hdulist.close()
-      	combine_list.append(tmplist)
+        combine_list.append(tmplist)
+
     for	i in hduindexes :
         # Take the i-1'th data extension (0-based) from each image and
         # put these into a list to combine
         tmplist = [ elem[i-1] for elem in combine_list ]
-	combo = ccdproc.Combiner(tmplist)
+        combo = ccdproc.Combiner(tmplist)
         if combine == 'average':
             output1 = combo.average_combine()
         else:
@@ -522,7 +523,7 @@ def make_master_flats(listname,flat_prefix='Flat_',filter_key='FILTER',read_from
     filter_name_dict, filters_uniq = find_filters_list(flist,filter_key)
     mylog("Found flats in filters {0}".format(filters_uniq))
     list_outnames = []
-    
+
     for name in filters_uniq:
         # find matching filenames and make list
         # flatlist1 = filter_name_dict[name]
@@ -541,10 +542,10 @@ def make_master_flats(listname,flat_prefix='Flat_',filter_key='FILTER',read_from
 def find_filters_list(flist,filter_key='FILTER'):
     filter_name_dict = {}
     filter_names = []
-    
+
     for line in flist:
-    	fname = line.strip()
-	hdulist = fits.open(fname)
+        fname = line.strip()
+        hdulist = fits.open(fname)
         filtname = hdulist[0].header[filter_key]
         if filtname == '' and len(hdulist)>1 :
             filtname = hdulist[1].header[filter_key]
@@ -556,7 +557,7 @@ def find_filters_list(flist,filter_key='FILTER'):
         hdulist.close()
     # uniq-ify the filter name list
     filters_uniq = list( set(filter_names) )
-    # this might also give a unique set 
+    # this might also give a unique set
     filters_uniq = list( set( filter_name_dict.values() ) )
     mylog("find_filters_list made a dictionary and found filters: ")
     # print filter_name_dict
@@ -603,7 +604,7 @@ def renormalize_by_flat(image,flat,read_from_file=False,datahdus=0):
         image = hduimage
     # done?
     return
-    
+
 # make flats w/o dark subtraction
 # these are combining dome flats most likely
 # arguments are the collection of images, and a filter string like 'R'
@@ -707,11 +708,11 @@ def merge_m4k_list(imagelist,raw_dir="raw",merged_dir="merged"):
 
 # Extracted these lines for merging M4k Data
 # from merge_m4k_list so we can merge one
-# image at a time. This will play nice 
+# image at a time. This will play nice
 # with RTS2.
-# 
+#
 # -Scott Swindell 12-4-2017
-# 
+#
 def merge_m4k_one_img(hdulist):
     hdulist = fits.open(fname)
     data1 = ccdproc.CCDData(hdulist[1].data, unit="adu")
@@ -730,7 +731,7 @@ def merge_m4k_one_img(hdulist):
 def process_and_merge_list(imagelist,datahdus=0):
     objectlist = process_list(imagelist,datahdus=datahdus)
     merge_m4k_list(objectlist)
-    return objectlist    
+    return objectlist
 
 # bad pixel mask
 
