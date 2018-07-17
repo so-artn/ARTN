@@ -33,6 +33,8 @@
 # needed for py notebook only?
 # %matplotlib inline
 
+
+
 import sys
 
 
@@ -735,3 +737,6 @@ def process_and_merge_list(imagelist,datahdus=0):
 # cosmic ray cleaning
 
 # make plots
+
+
+#THis is a test comment
