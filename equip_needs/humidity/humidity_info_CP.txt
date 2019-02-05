@@ -1,0 +1,28 @@
+we use a yankee chilled mirror hygrometer in the MMT chamber. i
+believe it is an MET-2010,
+http://www.yesinc.com/products/met-hyg.html. i don’t recall off-hand
+what the cost was, but they’re not cheap. i can follow up with barb
+russ on monday to see what we paid for it and when. we need to get
+another one or something similar to install outside because we also
+have the problem of outdoor sensors consistently reading too low. with
+a bit of searching i found some other similar devices on the market in
+the $2k-3k range plus extra for hardware to enable outdoor use.
+
+i’m currently setting up a rain/condensation detection system using a
+pair of hydreon optical rain sensors, http://rainsensors.com/. they’re
+only $60 a piece and can be monitored via a raspberry pi or
+arduino. other automated observatories wire these devices right into
+dome/shutter electronics to trigger closure automatically.
+
+tim
+
+just followed up with will goble about the outdoor chilled mirror
+hygrometer he’s spec’ed out for the MMT. he has a quote for an
+edgetech 200M,
+https://edgetechinstruments.com/product/meteorological-system/, for
+just under $8000. our compressed air system also uses a similar
+edgetech device and it’s been rock solid for over 25 years.
+
+there are cheaper chilled mirror hygrometers, but none of those i’ve
+found are really suited for long-term outdoor use in a harsh
+environment…
