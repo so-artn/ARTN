@@ -1,10 +1,10 @@
-#username, telescope, instrument, object_name, ra, dec, filter, exp_time, num_exp, airmass, lunarphase, priority, photometric, guiding, non_sidereal, begin, end, binning, dither, cadence
-#Demo5, Kuiper, Mont4k, S34087, 15:09:11.8, -34:13:44.9, I, 361.05, 8, 3.11, Bright, Routine, True, True, True, 2019-04-17 08:34:01.315983, 2019-07-17 08:34:01.315994, 2x2, n-RA, Once
-dsand, Kuiper, Mont4k, SN2019np_B, 10:29:22.0, +29:30:38.4, B, 120, 3, 1.7, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once
-dsand, Kuiper, Mont4k, SN2019np_V, 10:29:22.0, +29:30:38.4, V, 120, 3, 1.7, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once
-dsand, Kuiper, Mont4k, SN2019np_R, 10:29:22.0, +29:30:38.4, R, 120, 3, 1.7, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once
-dsand, Kuiper, Mont4k, SN2019np_I, 10:29:22.0, +29:30:38.4, I, 120, 3, 1.7, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once
-dsand, Kuiper, Mont4k, SN2019dke_B, 12:53:38.4, -26:17:31.5, B, 120, 3, 2.5, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once
-dsand, Kuiper, Mont4k, SN2019dke_V, 12:53:38.4, -26:17:31.5, B, 120, 3, 2.5, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once
-dsand, Kuiper, Mont4k, SN2019dke_R, 12:53:38.4, -26:17:31.5, B, 120, 3, 2.5, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once
-dsand, Kuiper, Mont4k, SN2019dke_I, 12:53:38.4, -26:17:31.5, B, 120, 3, 2.5, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once
+#username, telescope, instrument, object_name, ra, dec, filter, exp_time, num_exp, airmass, lunarphase, priority, photometric, guiding, non_sidereal, begin, end, binning, dither, cadence, non_sidereal_json
+#Demo5, Kuiper, Mont4k, S34087, 15:09:11.8, -34:13:44.9, I, 361.05, 8, 3.11, Bright, Routine, True, True, True, 2019-04-17 08:34:01.315983, 2019-07-17 08:34:01.315994, 2x2, n-RA, Once, '{}'
+dsand, Kuiper, Mont4k, SN2019np_B, 10:29:22.0, +29:30:38.4, B, 120, 3, 1.7, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once, '{}'
+dsand, Kuiper, Mont4k, SN2019np_V, 10:29:22.0, +29:30:38.4, V, 120, 3, 1.7, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once, '{}'
+dsand, Kuiper, Mont4k, SN2019np_R, 10:29:22.0, +29:30:38.4, R, 120, 3, 1.7, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once, '{}'
+dsand, Kuiper, Mont4k, SN2019np_I, 10:29:22.0, +29:30:38.4, I, 120, 3, 1.7, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once, '{}'
+dsand, Kuiper, Mont4k, SN2019dke_B, 12:53:38.4, -26:17:31.5, B, 120, 3, 2.5, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once, '{}'
+dsand, Kuiper, Mont4k, SN2019dke_V, 12:53:38.4, -26:17:31.5, B, 120, 3, 2.5, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once, '{}'
+dsand, Kuiper, Mont4k, SN2019dke_R, 12:53:38.4, -26:17:31.5, B, 120, 3, 2.5, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once, '{}'
+dsand, Kuiper, Mont4k, SN2019dke_I, 12:53:38.4, -26:17:31.5, B, 120, 3, 2.5, Any, Routine, False, False, False, 2019-04-17 08:34:01.315983, 2019-05-01 08:34:01.315994, 3x3, n-RA, Once, '{}'
