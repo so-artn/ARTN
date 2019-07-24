@@ -1,0 +1,101 @@
+SIMPLE  =                    T / conforms to FITS standard                      
+BITPIX  =                    8 / array data type                                
+NAXIS   =                    0 / number of array dimensions                     
+EXTEND  =                    T                                                  
+NEXTEND =                    2 / Number of extensions                           
+DETSIZE = '[1:4096,1:4096]'    / Detector size                                  
+CCDSUM  = '3 3     '           / CCD pixel summing                              
+CCDBIN1 =                    3 / Binning factor along axis 1                    
+CCDBIN2 =                    3 / Binning factor along axis 2                    
+FILENAME= 'TempImage2402.fits' / base filename at acquisition                   
+NCCDS   =                    1 / Number of CCDs                                 
+NAMPS   =                    2 / Number of amplifiers                           
+COMMENT ==================================================================      
+COMMENT Exposure                                                                
+COMMENT ==================================================================      
+DATE    = '2018-03-02'         / UTC date and time file writtten                
+DATE-OBS= '2018-03-02'         / UTC shutter opened                             
+EXPREQ  =                120.0 / Exposure time requested (seconds)              
+EXPTIME =                120.0 / Exposure time (seconds)                        
+IMAGETYP= 'object  '           / Image type                                     
+LOCTIME = '01:17:44'           / Local time at start of exposure                
+OBJECT  = 'AT2017hca'                                                           
+TIME-OBS= '08:17:44.210'       / UTC at start of exposure                       
+TIMESYS = 'UTC     '           / Time system                                    
+UT      = '08:17:44.210'       / UTC at start of exposure                       
+UTC-OBS = '08:17:44.210'       / UTC at start of exposure                       
+COMMENT ==================================================================      
+COMMENT Camera                                                                  
+COMMENT ==================================================================      
+DARKTIME=              120.101 / Dark time (seconds)                            
+DETGAIN =                    2 / Video gain setting                             
+DEWAR   = 'Mont4kDewar'        / Dewar name                                     
+PCIFILE = 'pci3.lod'           / PCI board DSP code filename                    
+TIMFILE = 'mont4k_config0.lod' / Timing board DSP code filename                 
+UTILFILE= 'util3.lod'          / Utility board DSP code filename                
+VIDGAIN =                    2 / Video gain setting                             
+VIDSPEED=                    2 / Video speed setting                            
+COMMENT ==================================================================      
+COMMENT Mont4k                                                                  
+COMMENT ==================================================================      
+DARKCUR = '0.0     '           / Average dark current (e-                       
+DETECTOR= 'mont4k sn3088'      / Detector name                                  
+GAIN1   = '3.17    '           / Conversion gain (e-                            
+GAIN2   = '3.185   '           / Conversion gain (e-                            
+INSTRUME= 'mont4k  '           / Instrument name                                
+OBSERVAT= 'mtbigelow'          / Observatory                                    
+OBSERVER= 'RTS2    '                                                            
+PIXSCAL1= '0.15    '           / Pixel scale for axis 1 (arcsec                 
+PIXSCAL2= '0.15    '           / Pixel scale for axis 2 (arcsec                 
+PIXSIZE1= '15.0    '           / Pixel size for axis 1 (microns)                
+PIXSIZE2= '15.0    '           / Pixel size for axis 2 (microns)                
+RDNOISE1= '6.8     '           / Read noise (electrons) for amp 1               
+RDNOISE2= '6.7     '           / Read noise (electrons) for amp 2               
+SITEELEV= '2510    '           / Altitude (meters)                              
+SITELAT = '32:24:59.3'         / Latitude (DD:MM:SS.S North)                    
+SITELONG= '110:44:04.3'        / Longitude (DD:MM:SS.S West)                    
+TELESCOP= 'bigelow-1.55m'      / Telescope name                                 
+TIMEZONE= '7       '           / local time zone                                
+COMMENT ==================================================================      
+COMMENT Telescope                                                               
+COMMENT ==================================================================      
+AIRMASS = '1.80    '           / airmass                                        
+AZIMUTH = '231.5   '           / azimuth                                        
+DEC     = '-08:05:30.8'        / declination                                    
+ELEVAT  = '33.7    '           / elevation                                      
+EPOCH   = '2000.0  '           / equinox of RA and DEC                          
+EQUINOX = '2000.0  '           / equinox of RA and DEC                          
+FOCUS   = '2208    '           / telescope focus position                       
+HA      = '+02:44:27'          / hour angle                                     
+JULIAN  = '2458179.845609'     / julian date                                    
+LST-OBS = '11:35:02'           / local siderial time                            
+MOTION  = '00      '           / motion flag                                    
+RA      = '08:49:41.07'        / right ascension                                
+ROTANGLE= '-224.4  '           / IIS rotation angle                             
+ST      = '11:35:02'           / local siderial time                            
+COMMENT ==================================================================      
+COMMENT Instrument                                                              
+COMMENT ==================================================================      
+FILTER  = 'Harris-R'           / Filter name                                    
+COMMENT ==================================================================      
+COMMENT Temperature                                                             
+COMMENT ==================================================================      
+CAMTEMP =             -119.155 / Camera temperature in C                        
+DEWTEMP =             -178.052 / Dewar temperature in C                         
+COMMENT ==================================================================      
+COMMENT ITL Focal plane                                                         
+COMMENT ==================================================================      
+ITL-HEAD= 'OK      '           / ITL Header flag                                
+N-AMPS-X=                    2 / Number of amplifiers in X                      
+N-AMPS-Y=                    1 / Number of amplifiers in Y                      
+N-DET-X =                    1 / Number of detectors in X                       
+N-DET-Y =                    1 / Number of detectors in Y                       
+NUM-AMPX=                    2 / Number of amplifiers in X                      
+NUM-AMPY=                    1 / Number of amplifiers in Y                      
+NUM-DETX=                    1 / Number of detectors in X                       
+NUM-DETY=                    1 / Number of detectors in Y                       
+REF-PIX1=                 2048 / Reference pixel 1                              
+REF-PIX2=                 2048 / Reference pixel 2                              
+SYS-NAME= 'mont4k  '           / System name                                    
+END                                                                             
+

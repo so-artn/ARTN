@@ -1,0 +1,194 @@
+
+Joe's slightly annotated notes on ARTN Meeting 06/20/18
+
+1. Review of Previous Run
+
+#############################
+
+We now have a focus routine that works, but we need to make it a robust and routine part of our beginning of the night operations.
+
+
+################################
+
+Eric and CSS has a focus map for the 61" -- delivered to Sand and now on GitHub page.
+
+They take seven images and the observer identifies the image with the best focus, FWHM
+
+###############################
+
+Discussion of Focus and Homing Focus at the 61"
+
+	Pros versus cons of homing focus
+
+	*** Decided it should be done at the beginning of every night for ARTN
+
+	Greg has ideas of using an absolute encoder
+
+	Currently the observer's responsibility to do so at the start of their run for traditional M4K observing
+
+	*** We should develop a separate "non-flat" procedure at the start of every night which includes homing focus and then setting to "rough" M4K focus value.  In case ARTN opens at a time other than twilight.
+
+#################################	
+
+
+2. Scheduling
+
+
+CJ and Scott cannot do 61" June/July because of their commitments to converting the VATT to NG
+
+Peter Milne and David Sand can do July
+
+David will send out an email asking who can observe -- DONE
+
+Note there are two TBS days at the end of June at the 61"
+
+################################
+
+
+3. 61" Progress Report
+
+
+Hardware work can be done before hand/before actual ARTN engineering nights
+
+Scott and Greg can work on testing out Greg's hardware during the day before ARTN runs
+
+Greg plans to have mirror covers and dome shutter hardware working for upcoming July run (he was going to have it for late June but nights not scheduled)
+
+Scott will incorporate into RTS2
+
+
+###################################
+
+4. Critical Path List versus Secondary List
+
+--Discussion on use of windscreens at the 61"
+
+	Agreement the windscreens would not be automated to the point of keeping a narrow opening for the telescope to look through
+
+	Windscreens used as an added layer of protection for the telescope versus not using them at all which is what FLWO does
+
+	Have the windscreens open once at the beginning of an ARTN night and then close at the end of the night?
+
+	Windscreen discussion on protection from water, ice, bolts etc over scope versus making the dome shutter seal more secure
+
+	Talk of how water has collected on top of the windscreens in the past.
+
+	Note both upper and lower windscreens operate each night with traditional observing
+	
+	Windscreens currently stowed at end of every night to protect scope and opened when scope in operation so they get used regularly.
+
+	Greg needs to evaluate the windscreen robustness at the 61", he wants to work with Jim and Jim's crew on this
+
+	Dennis is needed to set the priority and/or need for some of the items for ARTN like windscreen use for ARTN as he is the acting Ops director
+
+
+
+--Dome Seeing and Vent Fans
+
+	Why are the fans in the dome out of service?
+
+	Discussion of fans and light leaks, why they are covered up with wood
+
+	One fan vibrates the scope when in service per Greg
+
+	Sand says this is not on the critical path.
+
+
+--Critical Path List Versus secondary List
+
+	Critical
+		windscreens
+		elevator
+		many others, but not discussed.
+
+
+###############################
+
+5. SPIE Trip Review
+
+Talk #1
+	Eric Saunders Las Cumbres Observatory - leaving observatory
+
+	Transitioning to Python 3 - we should do this for our system; already in progress and should be transparent.
+	
+	Development of generic interface for RTS2 to other observatories versus idiosyncracies of each observatory called "payload"
+
+	Big Brother - handles telescope with and without RTS2
+
+Talk #2
+	Image X 3.0
+
+	Science image archiving tool
+
+	Developed with co-PI named "Avinda"?
+
+	Possible cheap solution to problem
+
+	Sand will ask about NOAO archiving.
+
+
+###################################
+
+
+6. Data Archiving Discussion
+
+	CJ - wants to get data to a location on a "shelf". From that point he feels it is up to the astronomers to evaluate/analyze it.  Dave disagrees, but doesn't think CJ+Scott should have to take this on.
+
+	Data Archiving: ARTN needs it. Who does it? Where to put it? We need to work on getting answers to these questions
+
+	ARTN data archiving policy versus Steward traditional observer data archiving policy
+	
+		Current Steward policy for traditional observers - once leave mountain no guarantee it will be saved
+
+	Open Archive - if we get funding from outside sources the data will need to be available for public consumption at some level.
+
+
+####################################
+
+7. FLWO Field Trip Review
+
+	Open discussion on highlights
+
+	Lightning Shutdown
+
+	AC/active cooling of dome
+
+	Auto LN2 filling of dewar
+
+
+	See notes on wiki
+
+####################################
+
+8. Problem Review and Brainstorming
+
+	Transition from CSS Remote to M4K regular problem with loss of guide/drift function in NG. [only tangentially related to ARTN]
+
+		Hand paddle could not move scope
+		
+		Guider could not move scope
+
+		Why? Quick fix was to power cycle TCS NG which cleared error
+
+	Review problem from CSS Remote to M4K regular with bias rate Betsy could not get rid of
+	
+		Why?
+
+		Quick fix was to power cycle TCS NG which cleared error
+
+	Discussion of observers power cycling TCS NG at the start of their run - they should do this, it is in instructions
+
+	Region of Interest
+		
+		If someone really wants this for ARTN (like Apai) the will have to define what they need and write a script to do this -- I have emailed D. Apai about the ROI issue (D. Sand)
+
+		Binning requirements between users (example CSS uses 4x4, regular observers use 3x3)
+
+		What camera parameters will be set when RTS2 starts?
+
+		Scott is going to work on camera driver
+
+
+
+		
+ 

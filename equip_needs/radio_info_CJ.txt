@@ -1,0 +1,101 @@
+I took some time and re did some research.  Here is the site I used:
+https://www.scadacore.com/tools/rf-path/rf-line-of-sight/
+
+The product I would recommend would be the Ubiquity Networks Airfiber5.  These things are well rated and go for about $1k per radio with an integrated antenna.
+  https://www.ui.com/airfiber/airfiber5/
+
+
+
+Here are the possible scenarios as I see them.  These are just estimates...  the cost to tie into existing infrastructure at each location is mostly unknown and could be as much as 10%.  I would expect labor to be 2 man days at any location. for installation, and 2 man days to setup the link.
+
+ 
+1)  Biosphere2
+distance to lemmon(powerhouse):  10.41 mi  (16.76 km)
+distance to bigelow:  no line of sight
+
+Pro: We already have a link in this location running at 5Mb. Biosphere already has a line through centurylink that is capable of 1Gb.  Mechanical hardware is in place..  The guy who used to maintain that link now works for steward and is willing to talk with us and possibly help.
+
+Con: its far.  We can only see 1 location.  We would have to pay an upgrade to get 1Gb, and we would pay a monthly fee.
+
+Option 1)   link to lemmon leaving CSS bigelow link in tact.
+3 radios (1k ea.). 2x  additional mounting hardware  (200 ea).  3 Fiber POE injectors($300 ea).  2 fiber patch cables(50 ea).  3 SFP modules(100 ea.)
+=$4700 hardware + labor + centurylink costs
+
+
+2)  rincon research(not visually confirmed)
+distance to lemmon(army tower): 15.58 mi (25.07 km)
+distance to bigelow: 15.29 mi (24.61 km)
+
+note:  I just found out about this possibility.  It checks out on the line of sight calculatoe, but I have not tried to get a visual on it.
+
+Pro:  its relatively close by.  We could get both lemmon and bigelow from there, or we could just get Mt Lemmon and leave the CSS link to bigelow in tact.
+
+Con: we have no clue how we would get internet there.  I checked and there seems to be no clear line of site to the university, so we would have to have a leased line of some sort.  Its not UA property, so 24 hour access might not be possible.
+
+
+Option 1)   link to lemmon leaving CSS bigelow link in tact.
+3 radios (1k ea.). 2x  additional mounting hardware  (200 ea).  3 Fiber POE injectors($300 ea).  2 fiber patch cables(50 ea).  3 SFP modules(100 ea.)
+=$4700 hardware + labor + internet costs
+
+Option 2)  link to both sites:
+5 radios (1k ea.). 4x  additional mounting hardware  (200 ea).  5 Fiber POE injectors($300 ea).  4 fiber patch cables(50 ea).  5 SFP modules(100 ea.)
+=$8000 hardware + labor + internet costs
+
+
+3)  UA tech park east
+distance to lemmon(army tower):  24.43 mi  (39.31 km)
+distance to bigelow:  22.90 mi  (36.86 km)
+
+pro:  there is already UA infrastructure there...  we just have to add our radios  We could get both lemmon and bigelow from there, or we could just get Mt Lemmon and leave the CSS link to bigelow in tact.  Its UA property so getting 24 hour access might not be too bad.  They have a service through COX already in place.
+
+Con: its far.  We would have to pay an upgrade to get 1Gb, and we would pay a monthly fee.
+
+Option 1)   link to lemmon leaving CSS bigelow link in tact.
+3 radios (1k ea.). 2x  additional mounting hardware  (200 ea).  3 Fiber POE injectors($300 ea).  2 fiber patch cables(50 ea).  3 SFP modules(100 ea.)
+=$4700 hardware + labor + internet costs
+
+Option 2) link to both sites:
+ 5 radios (1k ea.). 4x  additional mounting hardware  (200 ea).  5 Fiber POE injectors($300 ea).  4 fiber patch cables(50 ea).  5 SFP modules(100 ea.)
+=$8000 hardware + labor + internet costs
+
+
+4)  UA tech park west
+distance to lemmon(army tower):  19.73 mi  (31.74 km)
+distance to bigelow:  20.19 mi  (32.5 km)
+
+Pro:  Its close. We could get both lemmon and bigelow from there, or we could just get Mt Lemmon and leave the CSS link to bigelow in tact.    Its UA property so getting 24 hour access might not be too bad.
+
+Con: As of 1 year ago UA had no structures there, and internet was still not planned.
+
+Option 1)   link to lemmon leaving CSS bigelow link in tact.
+3 radios (1k ea.). 2x  additional mounting hardware  (200 ea).  3 Fiber POE injectors($300 ea).  2 fiber patch cables(50 ea).  3 SFP modules(100 ea.)
+=$4700 hardware + labor + internet costs
+
+Option 2)  link to both sites:
+5 radios (1k ea.). 4x  additional mounting hardware  (200 ea).  5 Fiber POE injectors($300 ea).  4 fiber patch cables(50 ea).  5 SFP modules(100 ea.)
+=$8000 hardware + labor + internet costs
+
+5)  Steward Observatory
+distance to lemmon:  no line of sight
+distance to bigelow:  17.13 mi (27.57 km)
+
+this is our current link to Bigelow with CSS.
+
+
+6)  Gould Simpson(not visually confirmed)
+distance to lemmon(upper dorm): 17.48 mi (28.14 km)
+distance to bigelow: 18.33 mi (29.5 km)
+
+note: This one checks out on multiple lone of sight calculators, but we could not see it from the mountain when we tried.
+
+pro: its on campus.  Ive talked to UITS and they say they could take care of everything but mounting the antennas...  no monthly fee.
+
+cons:  24 hour access to rooftops on campus are notoriously hard to get.
+
+Option 1)  link to lemmon leaving CSS bigelow link in tact.
+3 radios (1k ea.). 2x  additional mounting hardware  (200 ea).  3 Fiber POE injectors($300 ea).  2 fiber patch cables(50 ea).  3 SFP modules(100 ea.)
+=$4700 hardware + labor
+
+Option 2)  link to both sites:
+5 radios (1k ea.). 4x  additional mounting hardware  (200 ea).  5 Fiber POE injectors($300 ea).  4 fiber patch cables(50 ea).  5 SFP modules(100 ea.)
+=$8000 hardware + labor
