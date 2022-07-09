@@ -5,17 +5,15 @@ Documents, operating notes, requirements, observing scripts, etc for the Arizona
 queue scheduling , remote observing, and automation of UAO telescopes.
 
 
+[ARTN Weekly Meeting Notes and Agenda](https://docs.google.com/document/d/1ZRZImSmzIKWqF_xv2iwU5qVNLUNMrkcAh92T1Qfm75M/edit?usp=sharing)
 
+[Observing Run Notes and Draft Documentation](https://docs.google.com/document/d/18Xr6uQQizJHLIEkhqbJ-uOfTRr2v5vcn6HVpIXeIIJ8/edit?usp=sharing)
 
-
-
-[Scott's RTS2 Forck](https://github.com/srswinde/rts2 "Scott's RTS2 fork.")
-
-
-## Helpfull Info
+## Possibly old and deprecated information below this line.  Ignore unless you are in trouble!
 
 ###Usefull links
 
+[Scott's RTS2 Forck](https://github.com/srswinde/rts2 "Scott's RTS2 fork.")
 
 
 Useful links:
